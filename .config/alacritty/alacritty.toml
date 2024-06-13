@@ -1,0 +1,22 @@
+live_config_reload = true
+
+[font]
+size = 20.0
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Regular"
+
+[window]
+opacity = 0.99
+decorations = "buttonless"
+dynamic_padding = false
+
+
+[window.padding]
+x = 18
+
+[window.dimensions]
+columns = 120
+lines = 40
+

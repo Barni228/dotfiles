@@ -1,0 +1,25 @@
+[core]
+	editor = nvim
+	autocrlf = input
+[user]
+	name = Andrii Pukhalyk
+	email = pukhalyk1@gmail.com
+[color "status"]
+	added = blue
+[alias]
+	st = status -s
+	logg = log --all --decorate --oneline --graph
+	logl = log --oneline
+	conf = config --global
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE
+[merge]
+  tool = diffview
+[mergetool]
+  prompt = true
+  keepBackup = false
+[mergetool "diffview"]
+  cmd = nvim -n -c "DiffviewOpen" "$MERGE"

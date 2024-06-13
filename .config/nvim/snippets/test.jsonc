@@ -1,0 +1,37 @@
+{
+  "name": {           // any name that you want
+    "prefix": ["test", "template"],   // commands to activate snippet
+    "body": [
+      "My custom snippet",
+      // just text
+      "choice input: ${2|choice one,choice two,three,banana|}",
+      // choice input (idk how to cycle through them)
+      "$LINE_COMMENT Comment",
+      // comment (python #, c //)
+      "just input: $1",
+      // cursor will stop here for u to type (when you typed what you want press tab WITHOUT Escape)
+      "$BLOCK_COMMENT_START",
+      // start block comment (python """, c /*)
+      "block comment",
+      "$BLOCK_COMMENT_END",
+      // ending block comment (python """, c */)
+      "same input in different places: $3",
+      // whatever u type will go to $3
+      "$TM_FILEPATH $TM_FILENAME",
+      // file path and file name
+      "input with default value: ${4:value}",
+      // default value is "value"
+      "same input in different places: $3",
+      // will be same as in line 19
+      "$0",
+      // where cursor will end up
+      "$CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "$RANDOM",
+      "for ${4:i} in ${5:iterable}:",
+      "\t${6:pass}"
+    ],
+    "description": "my test snippet"
+  }
+}
+
+

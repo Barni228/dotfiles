@@ -1,0 +1,6 @@
+# Change settings for clangd (C and C++ formater, typechecker, and other)
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 200
+CommentPragmas: '.*'
+# do not format comments

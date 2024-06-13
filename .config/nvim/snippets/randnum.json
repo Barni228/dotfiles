@@ -1,0 +1,44 @@
+{
+  "one digit": {
+    "prefix": ["1rn", "n"],
+    "body": [
+      "${RANDOM/(\\d)+/$1/}"
+    ],
+    "description": "random digit"
+  },
+  "two digits": {
+    "prefix": ["2n", "2rn"],
+    "body": [
+      "${RANDOM/(\\d{2})+/$1/}"
+    ],
+    "description": "two random digits"
+  },
+  "three digits": {
+    "prefix": ["3n", "3rn"],
+    "body": [
+      "${RANDOM/(\\d{3})+/$1/}"
+    ],
+    "description": "three random digits"
+  },
+  "four digits": {
+    "prefix": ["4n", "4rn"],
+    "body": [
+      "${RANDOM/(\\d{2})+/$1/}${RANDOM/(\\d{2})+/$1/}"
+    ],
+    "description": "four random digits"
+  },
+  "five digits": {
+    "prefix": ["5n", "5rn"],
+    "body": [
+      "${RANDOM/(\\d{2})+/$1/}${RANDOM/(\\d{3})+/$1/}"
+    ],
+    "description": "five random digits"
+  },
+  "six digits": {
+    "prefix": ["6n", "6rn"],
+    "body": [
+      "$RANDOM"
+    ],
+    "description": "six random digits"
+  }
+}

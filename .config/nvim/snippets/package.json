@@ -1,0 +1,22 @@
+{
+  "name": "user_snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "text",
+        "path": "./test.jsonc"
+      },
+      {
+        "language": "all",
+        "path": "./randnum.json"
+      },
+      {
+        "language": "zsh",
+        "path": "./zsh.json"
+      }
+    ]
+  }
+}
