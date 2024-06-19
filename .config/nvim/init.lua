@@ -19,3 +19,4 @@ require "lazy_setup"
 require "polish"
 require "mysettings" -- execute my settings
 require "mykeymaps"
+require "myplugins-config"
