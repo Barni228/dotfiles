@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -133,7 +140,8 @@ unset key
 
 # --------------------------------------------------------------------
 
-export PATH="/opt/homebrew/bin:$PATH"
+# export PATH="/opt/homebrew/bin:$PATH"
+path+=/opt/homebrew/bin       # it is new way, zsh only
 
 source ~/venv/bin/activate
 
@@ -191,7 +199,6 @@ alias run='python3 -u ~/python/python.py 2>&1 | sed "/Secure coding is not enabl
 alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
 alias rom_num="python3 -u ~/python/rom_num.py"
-alias wr="python3 ~/python/wr.py"
 alias randchr="python3 ~/python/randchr.py"
 
 alias quitapps='osascript -e "quit app \"TextEdit\"" -e "quit app \"Preview\"" -e "quit app \"Pages\"" -e "quit app \"Adobe Acrobat Reader\"" -e "quit app \"Terminal\"" -e "quit app \"Activity Monitor\""'
@@ -200,6 +207,11 @@ alias nvimconf="nvim ~/.config/nvim/"
 alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
+alias vr='$EDITOR "._WRITE.$1" && cat "._WRITE.$1" 2> /dev/null | pbcopy; rm -f "._WRITE.$1"'
+
+wr () {
+  while read; do done
+}
 
 error () {
     return 1
@@ -219,13 +231,20 @@ sub () {
     deactivate                            # Deactivate the venv
 }
 
-vr () {
-    nvim "._WRITE.$1" && cat "._WRITE.$1" 2> /dev/null | pbcopy; rm -f "._WRITE.$1"
+mcd () {
+    mkdir -p "$1" && cd "$1"
 }
+
+# tell tab completion that mcd expects directories
+_mcd_completion() {
+    _files -/
+}
+compdef _mcd_completion mcd
 
 # Set up fzf
 eval "$(fzf --zsh)"
 
+# zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
 # autopairs
@@ -245,3 +264,6 @@ source $(brew --prefix)/share/zsh-autopair/autopair.zsh
 #
 # # autoload -Uz add-zsh-hook
 # # add-zsh-hook precmd custom_keybindings
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

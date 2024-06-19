@@ -41,7 +41,9 @@ zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
 
 zmodule prompt-pwd
-zmodule eriner
+# zmodule eriner
+
+zmodule romkatv/powerlevel10k --use degit
 
 # Modules that must be initialized last
 #
