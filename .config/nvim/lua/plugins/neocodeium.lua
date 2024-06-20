@@ -16,73 +16,142 @@ return {
 
       vim.keymap.set(
         "i",
-        "ça",
+        "<M-a>",
         neocodeium.accept,
         { desc = "accept suggestion", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "å",
-        neocodeium.accept,
-        { desc = "accept suggestion", noremap = true, silent = true }
-      )
-
-      vim.keymap.set(
-        "i",
-        "çw",
-        neocodeium.accept_word,
-        { desc = "accept a word", noremap = true, silent = true }
-      )
-
-      vim.keymap.set(
-        "i",
-        "∑",
+        "<M-w>",
         neocodeium.accept_word,
         { desc = "accept_word", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "çs",
+        "<M-s>",
         neocodeium.accept_line,
         { desc = "accept line", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "ß",
+        "<M-e>",
+        neocodeium.clear,
+        { desc = "clear suggestions", noremap = true, silent = true }
+      )
+
+      vim.keymap.set(
+        "i",
+        "<M-c>a",
+        neocodeium.accept,
+        { desc = "accept suggestion", noremap = true, silent = true }
+      )
+
+      vim.keymap.set(
+        "i",
+        "<M-c>w",
+        neocodeium.accept_word,
+        { desc = "accept a word", noremap = true, silent = true }
+      )
+
+      vim.keymap.set(
+        "i",
+        "<M-c>s",
         neocodeium.accept_line,
         { desc = "accept line", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "çn",
+        "<M-c>n",
         neocodeium.cycle_or_complete,
         { desc = "next suggestion", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "çr",
+        "<M-c>r",
         function() neocodeium.cycle_or_complete(-1) end,
         { desc = "cycle back", noremap = true, silent = true }
       )
 
       vim.keymap.set(
         "i",
-        "çq",
-        neocodeium.clear,
-        { desc = "clear suggestions", noremap = true, silent = true }
-      )
-
-      vim.keymap.set(
-        "i",
-        "œ",
+        "<M-c>e",
         neocodeium.clear,
         { desc = "clear suggestions", noremap = true, silent = true }
       )
     end,
   },
 }
+-- vim.keymap.set(
+--   "i",
+--   "ça",
+--   neocodeium.accept,
+--   { desc = "accept suggestion", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "å",
+--   neocodeium.accept,
+--   { desc = "accept suggestion", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "çw",
+--   neocodeium.accept_word,
+--   { desc = "accept a word", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "∑",
+--   neocodeium.accept_word,
+--   { desc = "accept_word", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "çs",
+--   neocodeium.accept_line,
+--   { desc = "accept line", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "ß",
+--   neocodeium.accept_line,
+--   { desc = "accept line", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "çn",
+--   neocodeium.cycle_or_complete,
+--   { desc = "next suggestion", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "çr",
+--   function() neocodeium.cycle_or_complete(-1) end,
+--   { desc = "cycle back", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "çq",
+--   neocodeium.clear,
+--   { desc = "clear suggestions", noremap = true, silent = true }
+-- )
+--
+-- vim.keymap.set(
+--   "i",
+--   "œ",
+--   neocodeium.clear,
+--   { desc = "clear suggestions", noremap = true, silent = true }
+-- )

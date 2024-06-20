@@ -107,3 +107,10 @@ vim.keymap.set(
 vim.keymap.set({ "n", "v", "x" }, "zt", function() neoscroll.zt { half_win_duration = 150 } end)
 vim.keymap.set({ "n", "v", "x" }, "zz", function() neoscroll.zz { half_win_duration = 150 } end)
 vim.keymap.set({ "n", "v", "x" }, "zb", function() neoscroll.zb { half_win_duration = 150 } end)
+
+-- }}
+
+-- vim move modifier {{
+vim.g.move_key_modifier = "M"
+vim.g.move_key_modifier_visualmode = "M"
+-- }}
