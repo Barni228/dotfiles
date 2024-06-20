@@ -11,7 +11,7 @@ return {
       model = "codeqwen:latest",
       retry_map = "r",
       show_model = true,
-      display_model = "split",
     },
+    cmd = { "Gen" },
   },
 }

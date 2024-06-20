@@ -1,4 +1,4 @@
--- Gen.nvim config
+-- Gen.nvim config {{{
 local gen = require "gen"
 gen.prompts["Fix_Code"] = {
   prompt = "Fix the following code. Only ouput the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
@@ -35,16 +35,35 @@ gen.prompts["Generate"] = {
   extract = "```$filetype\n(.-)```",
 }
 
+gen.prompts["Document"] = {
+  prompt = "Add documentation to the following code in form of comments, doc strings, etc. Only ouput the result in format ```$filetype\n...\n``` And nothing should be outside this format. Code is:\n```$filetype\n$text\n``` (include it with documentation)",
+  replace = true,
+  extract = "```$filetype\n(.-)```",
+}
+
+-- }}} Gen.nvim end
+
+-- Gen keymaps {{{
+vim.keymap.set({ "n", "v", "x" }, "<leader>a", ":Gen<cr>", { noremap = true, silent = true, desc = "Gen ai" })
+
+vim.keymap.set(
+  { "n", "v", "x" },
+  "<leader>]",
+  ":Gen Custom<cr>",
+  { noremap = true, silent = true, desc = "Gen custom" }
+)
+-- }}} Gen keymaps end
+
 -- scrolling
 local neoscroll = require "neoscroll"
 vim.keymap.set(
-  { "n", "v", "x" },
+  { "n", "v", "x", "i" },
   "<ScrollWheelUp>",
   function() neoscroll.scroll(-3, { move_cursor = false, duration = 50 }) end
 )
 
 vim.keymap.set(
-  { "n", "v", "x" },
+  { "n", "v", "x", "i" },
   "<ScrollWheelDown>",
   function() neoscroll.scroll(3, { move_cursor = false, duration = 50 }) end
 )
