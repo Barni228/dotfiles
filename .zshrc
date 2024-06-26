@@ -207,10 +207,13 @@ alias nvimconf="nvim ~/.config/nvim/"
 alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
-alias vr='$EDITOR "._WRITE.$1" && cat "._WRITE.$1" 2> /dev/null | pbcopy; rm -f "._WRITE.$1"'
+
+vr () {
+    $EDITOR ._WRITE.$1 && cat ._WRITE.$1 2> /dev/null | pbcopy; rm -f ._WRITE.$1
+}
 
 wr () {
-  while read; do done
+    while read; do done
 }
 
 error () {
