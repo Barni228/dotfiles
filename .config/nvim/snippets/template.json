@@ -1,0 +1,19 @@
+{
+  "snippet-name": {
+    "prefix": ["commands-to", "tigger-this"],
+    "body": [
+      "$1, ${2:DEFAULT}, $2, $0, $RANDOM",
+      "$CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "$LINE_COMMENT, $BLOCK_COMMENT_START, $BLOCK_COMMENT_END, $TM_FILEPATH, $TM_FILENAME",
+      "read -r ${2:VARIABLE}"
+    ],
+    "description": "Dont forget to add this to package.json"
+  },
+  "second-snippet": {
+    "prefix": ["command"],
+    "body": [
+      "run `:set filetype` to know your file type name"
+    ],
+    "description": "package.json"
+  },
+}
