@@ -142,6 +142,9 @@ unset key
 
 # export PATH="/opt/homebrew/bin:$PATH"
 path+=/opt/homebrew/bin       # it is new way, zsh only
+path+=/opt/X11/bin
+export DISPLAY=:0
+
 
 source ~/venv/bin/activate
 
@@ -198,7 +201,7 @@ bindkey '^e' edit-command-line
 alias run='python3 -u ~/python/python.py 2>&1 | sed "/Secure coding is not enabled for restorable state!/d"'
 alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
-alias rom_num="python3 -u ~/python/rom_num.py"
+alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
 
 alias quitapps='osascript -e "quit app \"TextEdit\"" -e "quit app \"Preview\"" -e "quit app \"Pages\"" -e "quit app \"Adobe Acrobat Reader\"" -e "quit app \"Terminal\"" -e "quit app \"Activity Monitor\""'
@@ -211,6 +214,28 @@ alias ls="eza  --icons=always -1"
 vr () {
     $EDITOR ._WRITE.$1 && cat ._WRITE.$1 2> /dev/null | pbcopy; rm -f ._WRITE.$1
 }
+
+comp () {
+    if [[ -f "$1" ]] then
+        if [[ "$1" =~ .+\.pyx? ]] then
+            cython --embed -o "${1%.*}.c" "$1"
+            clang -o "${1%.*}" "${1%.*}.c" $(python3-config --cflags) $(python3-config --ldflags) -lpython3.12
+            rm -r "${1%.*}.dSYM"
+        fi
+    fi
+}
+
+# Define the custom completion function
+_comp_comp() {
+    # Local variables to hold completion state
+    local -a files
+    local expl
+
+    # Use _files to generate the completion list for .py and .pyx files
+    _files -g '*.py' -g '*.pyx'
+}
+# Register the custom completion function for comp
+compdef _comp_comp comp
 
 wr () {
     while read; do done
