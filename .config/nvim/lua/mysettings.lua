@@ -36,7 +36,7 @@ local function get_run_cmd(args)
 
   -- Run lua files
   elseif ext == "lua" then
-    return "lua " .. file .. " " .. args
+    return "luajit " .. file .. " " .. args
   -- Run cython files
   elseif ext == "pyx" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .

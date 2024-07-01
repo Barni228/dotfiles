@@ -15,6 +15,35 @@
 -- vim.keymap.set({ "n", "v" }, "ds", "ds")
 -- vim.keymap.set({ "n", "v" }, "cs", "ds")
 
+local notify = require "notify"
+local function get_oil_path()
+  local use, imported = pcall(require, "oil")
+  if use then
+    local entry = imported.get_cursor_entry()
+
+    if entry then
+      if entry["type"] == "file" then
+        local dir = imported.get_current_dir()
+        local fileName = entry["name"]
+        local fullName = dir .. fileName
+        return vim.fn.shellescape(fullName)
+      end
+    end
+  end
+  return ""
+end
+
+vim.keymap.set("n", "gp", function()
+  local fullName = get_oil_path()
+  if fullName == "" then
+    notify "No file selected"
+    return
+  end
+  vim.cmd("silent !qlmanage -p " .. fullName)
+end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
+
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "LSP Rename" })
+
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>y",
@@ -25,7 +54,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>R",
-  ":Runt<cr>",
+  ":Run<cr>",
   { noremap = true, silent = true, desc = " Run in terminal" }
 )
 

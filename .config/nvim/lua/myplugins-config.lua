@@ -71,25 +71,25 @@ vim.keymap.set(
 vim.keymap.set(
   { "n", "v", "x" },
   "<C-u>",
-  function() neoscroll.ctrl_u { duration = 200, easing = "sine" } end
+  function() neoscroll.ctrl_u { duration = 200, easing = "linear" } end
 )
 
 vim.keymap.set(
   { "n", "v", "x" },
   "<C-d>",
-  function() neoscroll.ctrl_d { duration = 200, easing = "sine" } end
+  function() neoscroll.ctrl_d { duration = 200, easing = "linear" } end
 )
 
 vim.keymap.set(
   { "n", "v", "x" },
   "<C-b>",
-  function() neoscroll.ctrl_b { duration = 250, easing = "sine" } end
+  function() neoscroll.ctrl_b { duration = 250, easing = "linear" } end
 )
 
 vim.keymap.set(
   { "n", "v", "x" },
   "<C-f>",
-  function() neoscroll.ctrl_f { duration = 250, easing = "sine" } end
+  function() neoscroll.ctrl_f { duration = 250, easing = "linear" } end
 )
 
 vim.keymap.set(
