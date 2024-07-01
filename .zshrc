@@ -212,7 +212,7 @@ alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 
 vr () {
-    $EDITOR ._WRITE.$1 && cat ._WRITE.$1 2> /dev/null | pbcopy; rm -f ._WRITE.$1
+    $EDITOR __WRITE_.$1 && cat __WRITE_.$1 2> /dev/null | pbcopy; rm -f __WRITE_*
 }
 
 comp () {
