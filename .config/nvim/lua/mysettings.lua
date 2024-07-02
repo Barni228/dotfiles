@@ -22,13 +22,18 @@ vim.api.nvim_create_autocmd("FileType", {
 local function get_run_cmd(args)
   local file = vim.fn.expand "%"
   local ext = vim.fn.expand "%:e"
+  local file_name = vim.fn.expand "%:p:r"
 
   if ext == "zsh" then
     return "zsh " .. file .. " " .. args
 
   -- Compile with optimization level 2 and run c files
   elseif ext == "c" then
-    return "clang -O2 " .. file .. " -o %< && ./%< " .. args
+    return "clang -O2 " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args
+
+  -- Compile and run rust files
+  elseif ext == "rs" then
+    return "rustc " .. file .. " && " .. file_name .. " " .. args
 
   -- Run python files
   elseif ext == "py" then
