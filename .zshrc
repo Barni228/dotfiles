@@ -203,6 +203,7 @@ alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
 alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
+alias morse="python3 -u ~/python/morse.py"
 
 alias quitapps='osascript -e "quit app \"TextEdit\"" -e "quit app \"Preview\"" -e "quit app \"Pages\"" -e "quit app \"Adobe Acrobat Reader\"" -e "quit app \"Terminal\"" -e "quit app \"Activity Monitor\""'
 alias randchar="randchr"
@@ -212,6 +213,10 @@ alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 
 vr () {
+    $EDITOR __WRITE_.$1; rm -f __WRITE_*
+}
+
+vrc () {
     $EDITOR __WRITE_.$1 && cat __WRITE_.$1 2> /dev/null | pbcopy; rm -f __WRITE_*
 }
 
