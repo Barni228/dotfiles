@@ -8,8 +8,6 @@ vim.cmd ":tnoremap <Esc> <C-\\><C-N>"
 
 vim.cmd "cnoreabbrev Cody NeoCodeium"
 
-require('lspconfig').ruff.setup {}
-
 -- Enable wrap for markdown files (and gen nvim)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
@@ -95,6 +93,23 @@ local function get_format_cmd(args)
   end
 end
 
+---@type fun(name: string, how: string, after?: string, another?: string)
+local function run_cmd(name, how, after, another)
+  after = after or ""
+  another = another or ""
+  vim.api.nvim_create_user_command(name, function(opts)
+    local args = table.concat(opts.fargs, " ")
+    vim.cmd "w"
+    local cmd = get_run_cmd(args)
+    if cmd then
+      vim.cmd(how .. cmd .. after)
+      vim.cmd(another)
+    else
+      print "Unknown file extension"
+    end
+  end, { nargs = "*", complete = "file" })
+end
+
 -- Create the Format command
 vim.api.nvim_create_user_command("Form", function(opts)
   local args = table.concat(opts.fargs, " ")
@@ -114,62 +129,11 @@ vim.api.nvim_create_user_command("Forms", function()
   vim.lsp.buf.range_formatting({}, {start_pos[2] - 1, start_pos[3] - 1}, {end_pos[2] - 1, end_pos[3]})
 end, {})
 
--- Create the Run command
-vim.api.nvim_create_user_command("Run", function(opts)
-  local args = table.concat(opts.fargs, " ")
-  vim.cmd "w"
-  local cmd = get_run_cmd(args)
-  if cmd then
-    vim.cmd("!" .. cmd)
-  else
-    print "unknown file extension"
-  end
-end, { nargs = "*", complete = "file" })
-
--- Create the Runt command
-vim.api.nvim_create_user_command("Runt", function(opts)
-  local args = table.concat(opts.fargs, " ")
-  vim.cmd "w"
-  local cmd = get_run_cmd(args)
-  if cmd then
-    vim.cmd("terminal " .. cmd)
-    vim.cmd "norm i"
-  else
-    print "unknown file extension"
-  end
-end, { nargs = "*", complete = "file" })
-
-vim.api.nvim_create_user_command("RunTf", function(opts)
-  local args = table.concat(opts.fargs, " ")
-  vim.cmd "w"
-  local cmd = get_run_cmd(args)
-  if cmd then
-    vim.cmd("TermExec cmd='" .. cmd .. "'")
-  else
-    print "unknown file extension"
-  end
-end, { nargs = "*", complete = "file" })
-
-vim.api.nvim_create_user_command("RunTh", function(opts)
-  local args = table.concat(opts.fargs, " ")
-  vim.cmd "w"
-  local cmd = get_run_cmd(args)
-  if cmd then
-    vim.cmd("TermExec direction=horizontal go_back=0 cmd='" .. cmd .. "'")
-  else
-    print "unknown file extension"
-  end
-end, { nargs = "*", complete = "file" })
-
-vim.api.nvim_create_user_command("RunTv", function(opts)
-  local args = table.concat(opts.fargs, " ")
-  vim.cmd "w"
-  local cmd = get_run_cmd(args)
-  if cmd then
-    vim.cmd("TermExec direction=vertical go_back=0 size=50 cmd='" .. cmd .. "'")
-  else
-    print "unknown file extension"
-  end
-end, { nargs = "*", complete = "file" })
+-- Create the Run commands
+run_cmd("Run", "!")
+run_cmd("Runt", "terminal ", "", "norm i")
+run_cmd("RunTf", "TermExec cmd='", "'")
+run_cmd("RunTh", "TermExec direction=horizontal go_back=0 cmd='", "'")
+run_cmd("RunTv", "TermExec direction=vertical go_back=0 size=50 cmd='", "'")
 
 return {}
