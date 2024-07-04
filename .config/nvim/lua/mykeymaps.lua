@@ -47,7 +47,7 @@ vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { noremap = true, silent =
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>y",
-  'mzGVgg"+y`z<cr>',
+  'mzGVgg"+y`z',
   { noremap = true, silent = true, desc = " Copy content of the file" }
 )
 
