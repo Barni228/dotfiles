@@ -17,3 +17,5 @@ toml
 morse
 nvim
 config
+py
+zsh

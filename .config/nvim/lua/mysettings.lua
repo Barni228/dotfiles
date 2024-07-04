@@ -71,7 +71,7 @@ local function get_format_cmd(args)
 
   -- Format python files
   if ext == "py" then
-    return "ruff format --config ~/.dotfiles/pyproject.toml" .. args .. " " .. file
+    return "ruff format " .. args .. " " .. file
 
   -- Format zsh files
   elseif ext == "zsh" then
