@@ -42,7 +42,29 @@ vim.keymap.set("n", "gp", function()
   vim.cmd("silent !qlmanage -p " .. fullName)
 end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
 
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "LSP Rename" })
+-- vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" })
+
+vim.keymap.set(
+  "n",
+  "<leader>la",
+  vim.lsp.buf.code_action,
+  { noremap = true, silent = true, desc = "Code Action" }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>lt",
+  vim.lsp.buf.type_definition,
+  { noremap = true, silent = true, desc = "Type Definition" }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>lR",
+  vim.lsp.buf.references,
+  { noremap = true, silent = true, desc = "References" }
+)
 
 vim.api.nvim_set_keymap(
   "n",

@@ -83,6 +83,14 @@ local function get_format_cmd(args)
   -- Format c files
   elseif ext == "c" then
     return "clang-format -i " .. args .. " " .. file
+
+  -- Format rust files
+  elseif ext == "rs" then
+    return "rustfmt " .. args .. " " .. file
+
+  -- Format lua files
+  elseif ext == "lua" then
+    return "stylua " .. args .. " " .. file
   else
     return nil
   end
