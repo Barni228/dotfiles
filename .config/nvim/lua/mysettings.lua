@@ -7,7 +7,8 @@ vim.cmd "set clipboard="
 vim.cmd ":tnoremap <Esc> <C-\\><C-N>"
 
 vim.cmd "cnoreabbrev Cody NeoCodeium"
-vim.cmd "cnoreabbrev Form Format"
+
+require('lspconfig').ruff.setup {}
 
 -- Enable wrap for markdown files (and gen nvim)
 vim.api.nvim_create_autocmd("FileType", {
@@ -70,11 +71,9 @@ local function get_format_cmd(args)
   local ext = vim.fn.expand "%:e"
   print('"' .. args .. '"')
 
-  -- if args == "" or args == "^H" then args = "\b" end
-
   -- Format python files
   if ext == "py" then
-    return "ruff format " .. args .. " " .. file
+    return "ruff format --config ~/.dotfiles/pyproject.toml" .. args .. " " .. file
 
   -- Format zsh files
   elseif ext == "zsh" then
@@ -97,15 +96,22 @@ local function get_format_cmd(args)
 end
 
 -- Create the Format command
-vim.api.nvim_create_user_command("Format", function(opts)
+vim.api.nvim_create_user_command("Form", function(opts)
   local args = table.concat(opts.fargs, " ")
   vim.cmd "w"
   local cmd = get_format_cmd(args)
   if cmd then
     vim.cmd("!" .. cmd)
   else
-    print "unknown file extension"
+    print "Unknown file extension"
   end
+end, {})
+
+-- Create the Format Selection command
+vim.api.nvim_create_user_command("Forms", function()
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+  vim.lsp.buf.range_formatting({}, {start_pos[2] - 1, start_pos[3] - 1}, {end_pos[2] - 1, end_pos[3]})
 end, {})
 
 -- Create the Run command
