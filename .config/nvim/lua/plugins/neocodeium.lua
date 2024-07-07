@@ -10,7 +10,7 @@ return {
       local neocodeium = require "neocodeium"
       neocodeium.setup {
         show_label = false,
-        -- silent = true,
+        silent = true,
         -- max_lines = -1,
       }
 
