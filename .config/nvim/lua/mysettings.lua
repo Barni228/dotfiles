@@ -88,6 +88,29 @@ local function get_format_cmd(args)
   -- Format lua files
   elseif ext == "lua" then
     return "stylua " .. args .. " " .. file
+
+  -- Format json files
+  elseif ext == "json" then
+    return "jsonrepair "
+      .. file
+      .. " --overwrite "
+      .. "&& jq . "
+      .. file
+      .. " > "
+      .. file
+      .. ".tmp && mv "
+      .. file
+      .. ".tmp "
+      .. file
+
+  -- Format toml files
+  elseif ext == "toml" then
+    return "taplo fmt " .. args .. " " .. file
+
+  -- Format yaml files
+  elseif ext == "yaml" then
+    return "prettier --write " .. args .. " " .. file
+
   else
     return nil
   end
@@ -124,9 +147,9 @@ end, {})
 
 -- Create the Format Selection command
 vim.api.nvim_create_user_command("Forms", function()
-  local start_pos = vim.fn.getpos("'<")
-  local end_pos = vim.fn.getpos("'>")
-  vim.lsp.buf.range_formatting({}, {start_pos[2] - 1, start_pos[3] - 1}, {end_pos[2] - 1, end_pos[3]})
+  local start_pos = vim.fn.getpos "'<"
+  local end_pos = vim.fn.getpos "'>"
+  vim.lsp.buf.range_formatting({}, { start_pos[2] - 1, start_pos[3] - 1 }, { end_pos[2] - 1, end_pos[3] })
 end, {})
 
 -- Create the Run commands
