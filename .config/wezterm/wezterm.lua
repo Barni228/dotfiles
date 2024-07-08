@@ -12,14 +12,22 @@ local fonts = {
 	-- 	style = "Italic",
 	-- },
 	-- { "Symbol", 17 },
-	{ "FiraCode Nerd Font", 19 },
+	-- { "FiraCode Nerd Font", 19 },
+	{
+		{
+			family = "FiraCode Nerd Font",
+			harfbuzz_features = { "ss05", "ss03", "cv30", "ss02", "ss08" }, -- enable ligatures
+			-- "@", "&", "|", "<= >=", "== === != !=="
+		},
+		19,
+	},
 	{ "ComicShannsMono Nerd Font", 20 },
 	{ "JetBrainsMono Nerd Font", 19 },
 	{ "CaskaydiaCove Nerd Font", 19 },
 	{ "Hack Nerd Font", 19 },
 }
 local font_i = 0
--- This is where you actually apply your config choices ->
+-- This is where you actually apply your config choices -> @ &
 
 -- For example, changing the color scheme:
 -- config.cursor_blink_ease_in = "Constant" |--| ---------> === =========> =>   => <= >= <>
@@ -30,8 +38,14 @@ local font_i = 0
 -- 	keys = {
 -- config.color_scheme = "TwoDark++"
 
-wezterm.on("set-fullscreen", function(window, pane)
-	window:perform_action(wezterm.action.ToggleFullScreen, pane)
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	if name == "font-size" then
+		window:set_config_overrides({
+			font_size = tonumber(value),
+		})
+	elseif name == "fullscreen" then
+		window:perform_action(wezterm.action.ToggleFullScreen, pane)
+	end
 end)
 
 config.window_background_gradient = {
@@ -46,7 +60,6 @@ config.window_background_gradient = {
 config.colors = {
 	background = "#1c1d27",
 }
-config.font_dirs = { "~/Library/Fonts" }
 config.font_size = 19.0
 config.font = wezterm.font(fonts[1][1])
 config.window_background_opacity = 0.97

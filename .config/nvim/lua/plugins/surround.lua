@@ -4,6 +4,7 @@ return {
     "kylechui/nvim-surround",
     dependencies = {},
     config = function()
+      ---@diagnostic disable-next-line
       require("nvim-surround").setup {
         -- when i type something like ysiwf it will ask me for function name and surround text with that function
         delimiters = {
@@ -20,7 +21,6 @@ return {
         },
       }
     end,
-    -- opts = {},
     event = "User AstroFile",
   },
 }

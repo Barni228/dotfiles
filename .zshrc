@@ -163,6 +163,8 @@ export VISUAL=nvim
 bindkey -v
 export KEYTIMEOUT=1
 
+# tell wezterm to start in fullscreen
+printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
