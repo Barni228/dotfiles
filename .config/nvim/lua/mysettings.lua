@@ -17,21 +17,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 -- it will not stop everything, only delay function execution, so that gen markdown has time to load
 
-local function file_exists(file)
-  local f = io.open(file, "r")
-  if f then
-    io.close(f)
-    return true
-  else
-    return false
-  end
-end
 -- Function to get the terminal command based on file extension
 local function get_run_cmd(args)
-  local file = vim.fn.expand "%"
-  local dir = vim.fn.expand "%:p:h"
+  local file = vim.fn.shellescape(vim.fn.expand "%")
   local ext = vim.fn.expand "%:e"
-  local file_name = vim.fn.expand "%:p:r"
+  local file_name = vim.fn.shellescape(vim.fn.expand "%:p:r")
 
   if ext == "zsh" then
     return "zsh " .. file .. " " .. args
@@ -42,11 +32,8 @@ local function get_run_cmd(args)
 
     -- Compile and run rust files
   elseif ext == "rs" then
-    if file_exists(dir .. "/" .. "Cargo.toml") then --> if cargo is available
-      return "cargo run " .. file .. " " .. args --> use it
-    else
-      return "rustc " .. file .. " && " .. file_name .. " " .. args --> compile and run
-    end
+    return "cargo check && (cargo run --" .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
+    -- if cargo is available, use it, else use rustc
 
   -- Run python files
   elseif ext == "py" then
@@ -59,6 +46,10 @@ local function get_run_cmd(args)
   elseif ext == "pyx" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .
     return 'python3 -c "import pyximport; pyximport.install(); import ' .. module_name .. '"'
+
+  -- Show markdown files
+  elseif ext == "md" then
+    return "glow " .. file
   else
     return nil
   end
