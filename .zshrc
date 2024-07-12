@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# tell wezterm to start in fullscreen
+printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -163,9 +166,6 @@ export VISUAL=nvim
 bindkey -v
 export KEYTIMEOUT=1
 
-# tell wezterm to start in fullscreen
-printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
-
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
@@ -284,6 +284,13 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # autopairs
 source $(brew --prefix)/share/zsh-autopair/autopair.zsh
+
+# atuin
+. "$HOME/.atuin/bin/env" # . is same as source
+eval "$(atuin init zsh --disable-up-arrow)"
+bindkey -M vicmd '/' atuin-up-search-vicmd
+source ~/.atuin/_atuin
+
 # Redirect stderr to a function that colorizes it
 # exec 2> >(while read -r line; do echo -e "\033[38;5;202m$line\033[0m" >&2; done)
 
@@ -304,3 +311,4 @@ source $(brew --prefix)/share/zsh-autopair/autopair.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
