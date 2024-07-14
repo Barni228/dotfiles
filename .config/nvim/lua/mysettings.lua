@@ -32,20 +32,23 @@ local function get_run_cmd(args)
 
     -- Compile and run rust files
   elseif ext == "rs" then
-    return "cargo check && (cargo run --" .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
     -- if cargo is available, use it, else use rustc
+    -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
+    -- if cargo is available, use it, else use cargo script
+    return "cargo check && (cargo run --" .. args .. ") || (cargo script --debug " .. file .. " -- " .. args .. ")"
 
-  -- Run python files
+    -- Run python files
   elseif ext == "py" then
     return "python3 " .. file .. " " .. args
 
   -- Run lua files
   elseif ext == "lua" then
     return "luajit " .. file .. " " .. args
+
   -- Run cython files
   elseif ext == "pyx" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .
-    return 'python3 -c "import pyximport; pyximport.install(); import ' .. module_name .. '"'
+    return "python3 -c 'import pyximport; pyximport.install(); import " .. module_name .. "'"
 
   -- Show markdown files
   elseif ext == "md" then
@@ -58,14 +61,13 @@ end
 local function get_format_cmd(args)
   local file = vim.fn.expand "%"
   local ext = vim.fn.expand "%:e"
-  print('"' .. args .. '"')
 
   -- Format python files
   if ext == "py" then
     return "ruff format " .. args .. " " .. file
 
   -- Format zsh files
-  elseif ext == "zsh" then
+  elseif ext == "zsh" or ext == "sh" or ext == "bash" or ext == "" or ext == "fish" then
     return "shfmt -w -i 4 " .. args .. " " .. file
 
   -- Format c files
@@ -101,27 +103,9 @@ local function get_format_cmd(args)
   -- Format yaml files
   elseif ext == "yaml" then
     return "prettier --write " .. args .. " " .. file
-
   else
     return nil
   end
-end
-
----@type fun(name: string, how: string, after?: string, another?: string)
-local function run_cmd(name, how, after, another)
-  after = after or ""
-  another = another or ""
-  vim.api.nvim_create_user_command(name, function(opts)
-    local args = table.concat(opts.fargs, " ")
-    vim.cmd "w"
-    local cmd = get_run_cmd(args)
-    if cmd then
-      vim.cmd(how .. cmd .. after)
-      vim.cmd(another)
-    else
-      print "Unknown file extension"
-    end
-  end, { nargs = "*", complete = "file" })
 end
 
 -- Create the Format command
@@ -143,11 +127,28 @@ vim.api.nvim_create_user_command("Forms", function()
   vim.lsp.buf.range_formatting({}, { start_pos[2] - 1, start_pos[3] - 1 }, { end_pos[2] - 1, end_pos[3] })
 end, {})
 
+---@type fun(name: string, how: string, after?: string, another?: string)
+local function run_cmd(name, how, after, another)
+  after = after or ""
+  another = another or ""
+  vim.api.nvim_create_user_command(name, function(opts)
+    local args = table.concat(opts.fargs, " ")
+    vim.cmd "w"
+    local cmd = get_run_cmd(args)
+    if cmd then
+      vim.cmd(how .. cmd .. after)
+      vim.cmd(another)
+    else
+      print "Unknown file extension"
+    end
+  end, { nargs = "*", complete = "file" })
+end
+
 -- Create the Run commands
 run_cmd("Run", "!")
 run_cmd("Runt", "terminal ", "", "norm i")
-run_cmd("RunTf", "TermExec cmd='", "'")
-run_cmd("RunTh", "TermExec direction=horizontal go_back=0 cmd='", "'")
-run_cmd("RunTv", "TermExec direction=vertical go_back=0 size=50 cmd='", "'")
+run_cmd("RunTf", 'TermExec cmd="', '"')
+run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
+run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
 
 return {}

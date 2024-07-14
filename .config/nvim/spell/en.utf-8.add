@@ -21,3 +21,5 @@ py
 zsh
 json
 rustc
+HashMap
+HashSet

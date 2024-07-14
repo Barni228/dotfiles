@@ -20,7 +20,6 @@ local function get_oil_path()
   local use, imported = pcall(require, "oil")
   if use then
     local entry = imported.get_cursor_entry()
-
     if entry then
       if entry["type"] == "file" then
         local dir = imported.get_current_dir()
@@ -33,6 +32,7 @@ local function get_oil_path()
   return ""
 end
 
+-- QuickLook in Oil {{{
 vim.keymap.set("n", "gp", function()
   local fullName = get_oil_path()
   if fullName == "" then
@@ -41,7 +41,9 @@ vim.keymap.set("n", "gp", function()
   end
   vim.cmd("silent !qlmanage -p " .. fullName)
 end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
+-- }}}
 
+-- Formatting keymaps {{{
 vim.keymap.set(
   "n",
   "<leader><leader>",
@@ -52,10 +54,12 @@ vim.keymap.set(
 vim.keymap.set(
   "v",
   "<leader><leader>",
-  ":Forms<cr>",
+  "<cmd>Forms<cr>",
   { noremap = true, silent = true, desc = "Format current selection" }
 )
+-- }}}
 
+-- LSP keymaps {{{
 -- vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format" })
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" })
 
@@ -79,38 +83,38 @@ vim.keymap.set(
   vim.lsp.buf.references,
   { noremap = true, silent = true, desc = "References" }
 )
+-- }}}
 
-vim.api.nvim_set_keymap(
+-- Clipboard keymaps {{{
+vim.keymap.set(
   "n",
   "<Leader>y",
   'mzGVgg"+y`z',
   { noremap = true, silent = true, desc = " Copy content of the file" }
 )
+-- }}}
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>R",
-  ":Run<cr>",
-  { noremap = true, silent = true, desc = " Run in terminal" }
-)
+-- Run keymaps {{{
+vim.keymap.set("n", "<Leader>R", "<cmd>Run<cr>", { noremap = true, silent = true, desc = " Run in terminal" })
 
-vim.api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>trf",
-  ":RunTf<cr>",
+  "<cmd>RunTf<cr>",
   { noremap = true, silent = true, desc = "󰡖 ToggleTerm run float" }
 )
 
-vim.api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>trh",
-  ":RunTh<cr>",
+  "<cmd>RunTh<cr>",
   { noremap = true, silent = true, desc = " ToggleTerm run horizontal" }
 )
 
-vim.api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>trv",
-  ":RunTv<cr>",
+  "<cmd>RunTv<cr>",
   { noremap = true, silent = true, desc = " ToggleTerm run vertical" }
 )
+-- }}}
