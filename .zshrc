@@ -141,6 +141,7 @@ unset key
 # }}} End configuration added by Zim install
 
 
+####################################################################
 # --------------------------------------------------------------------
 
 # export PATH="/opt/homebrew/bin:$PATH"
@@ -162,6 +163,7 @@ source ~/venv/bin/activate
 export EDITOR=nvim
 export VISUAL=nvim
 
+export XDG_CONFIG_HOME="$HOME/.config"
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
