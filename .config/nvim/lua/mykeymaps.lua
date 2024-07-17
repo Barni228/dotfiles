@@ -43,6 +43,14 @@ vim.keymap.set("n", "gp", function()
 end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
 -- }}}
 
+-- git keymaps {{{
+vim.keymap.set("n", "<leader>gg", function()
+  -- vim.cmd("LazyGit")
+  vim.cmd("LazyGitCurrentFile")
+  vim.cmd("tnoremap <buffer> <esc> <esc>") -- disable escape key
+end, { noremap = true, silent = true, desc = "󰊢 LazyGit" })
+-- }}}
+
 -- Formatting keymaps {{{
 vim.keymap.set(
   "n",

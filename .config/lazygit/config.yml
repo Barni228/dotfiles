@@ -2,7 +2,15 @@ gui:
   nerdFontsVersion: "3"
   showFileTree: false
 
-  theme: 
-      selectedLineBgColor:
-        - "#26464a"
+  theme:
+    selectedLineBgColor:
+      - "#26464a"
 disableStartupPopups: true
+
+os:
+  edit: 'nvim --server /tmp/nvim-server.pipe --remote-tab "{{filename}}"'
+  editAtLine: 'nvim +{{line}} --server /tmp/nvim-server.pipe --remote-tab "{{filename}}"'
+  openDirInEditor: 'nvim --server /tmp/nvim-server.pipe --remote-tab "{{dir}}"'
+
+git:
+  parseEmoji: true

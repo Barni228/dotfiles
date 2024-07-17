@@ -12,7 +12,7 @@ vim.cmd "cnoreabbrev Cody NeoCodeium"
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (200 = 0.2 second)
+    vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (400 = 0.4 second)
   end,
 })
 -- it will not stop everything, only delay function execution, so that gen markdown has time to load
@@ -101,7 +101,7 @@ local function get_format_cmd(args)
     return "taplo fmt " .. args .. " " .. file
 
   -- Format yaml files
-  elseif ext == "yaml" then
+  elseif ext == "yaml" or ext == "yml" then
     return "prettier --write " .. args .. " " .. file
   else
     return nil

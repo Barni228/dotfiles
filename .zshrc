@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# tell wezterm to start in fullscreen
-printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
-
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -160,13 +157,17 @@ source ~/venv/bin/activate
 
 
 # set nvim as default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=nv
+export VISUAL=nv
 
 export XDG_CONFIG_HOME="$HOME/.config"
+
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+
+# tell wezterm to start in fullscreen
+printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -216,8 +217,14 @@ alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 
+alias nvim='nvim --listen /tmp/nvim-server.pipe'
+
+nv () {
+    nvim --listen /tmp/nvim-server.pipe $@
+}
+
 vr () {
-    $EDITOR __WRITE_.$1; rm -f __WRITE_*
+    $EDITOR "__WRITE_.$1"; rm -f __WRITE_*
 }
 
 vrc () {
