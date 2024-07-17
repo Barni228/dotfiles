@@ -44,6 +44,7 @@ end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
 -- }}}
 
 -- git keymaps {{{
+-- vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { noremap = true, silent = true, desc = "󰊢 Neogit" })
 vim.keymap.set("n", "<leader>gg", function()
   -- vim.cmd("LazyGit")
   vim.cmd("LazyGitCurrentFile")
