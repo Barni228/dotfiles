@@ -54,10 +54,6 @@ vim.keymap.set(
 )
 -- }}} Gen keymaps end
 
--- vim move modifier {{
-vim.g.move_key_modifier = "M"
-vim.g.move_key_modifier_visualmode = "M"
--- }}
 -- scrolling {{{
 if not vim.g.neovide then
   local neoscroll = require "neoscroll"
