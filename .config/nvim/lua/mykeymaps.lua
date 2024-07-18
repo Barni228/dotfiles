@@ -103,6 +103,16 @@ vim.keymap.set(
 )
 -- }}}
 
+-- Terminal keymaps {{{
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true, desc = "Escape terminal mode" })
+vim.keymap.set(
+  "n",
+  "<Leader>tp",
+  "<cmd>TermExec cmd='ipython; exit'<cr>",
+  { noremap = true, silent = true, desc = " ToggleTerm ipython" }
+)
+-- }}}
+
 -- Run keymaps {{{
 vim.keymap.set("n", "<Leader>R", "<cmd>Run<cr>", { noremap = true, silent = true, desc = " Run in terminal" })
 
