@@ -5,6 +5,21 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local bg
+
+if vim.g.neovide then
+  vim.cmd [[
+    highlight Cursor guifg=#1d222b guibg=#9a9faa
+    highlight iCursor guifg=#1d222b guibg=#9a9faa
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver25-iCursor
+]]
+  bg = "#1f2029"
+
+else
+  bg = "none"
+end
+
 ---@type LazySpec
 return {
   "AstroNvim/astroui",
@@ -15,7 +30,7 @@ return {
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes
-        Normal = { bg = "none" },
+        Normal = { bg = bg },
       },
       astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },

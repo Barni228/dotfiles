@@ -24,35 +24,35 @@ local function get_run_cmd(args)
   local file_name = vim.fn.shellescape(vim.fn.expand "%:p:r")
 
   if ext == "zsh" then
-    return "zsh " .. file .. " " .. args
+    return "/usr/bin/env zsh " .. file .. " " .. args
 
   -- Compile with optimization level 2 and run c files
   elseif ext == "c" then
-    return "clang -O2 " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args
+    return "/usr/bin/env clang -O2 " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args
 
     -- Compile and run rust files
   elseif ext == "rs" then
     -- if cargo is available, use it, else use rustc
     -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
     -- if cargo is available, use it, else use cargo script
-    return "cargo check && (cargo run --" .. args .. ") || (cargo script --debug " .. file .. " -- " .. args .. ")"
+    return "/usr/bin/env cargo check && (/usr/bin/env cargo run --" .. args .. ") || (/usr/bin/env cargo script --debug " .. file .. " -- " .. args .. ")"
 
     -- Run python files
   elseif ext == "py" then
-    return "python3 " .. file .. " " .. args
+    return "/usr/bin/env python3 " .. file .. " " .. args
 
   -- Run lua files
   elseif ext == "lua" then
-    return "luajit " .. file .. " " .. args
+    return "/usr/bin/env luajit " .. file .. " " .. args
 
   -- Run cython files
   elseif ext == "pyx" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .
-    return "python3 -c 'import pyximport; pyximport.install(); import " .. module_name .. "'"
+    return "/usr/bin/env python3 -c 'import pyximport; pyximport.install(); import " .. module_name .. "'"
 
   -- Show markdown files
   elseif ext == "md" then
-    return "glow " .. file
+    return "/usr/bin/env glow " .. file
   else
     return nil
   end
@@ -64,30 +64,30 @@ local function get_format_cmd(args)
 
   -- Format python files
   if ext == "py" then
-    return "ruff format " .. args .. " " .. file
+    return "/usr/bin/env ruff format " .. args .. " " .. file
 
   -- Format zsh files
   elseif ext == "zsh" or ext == "sh" or ext == "bash" or ext == "" or ext == "fish" then
-    return "shfmt -w -i 4 " .. args .. " " .. file
+    return "/usr/bin/env shfmt -w -i 4 " .. args .. " " .. file
 
   -- Format c files
   elseif ext == "c" then
-    return "clang-format -i " .. args .. " " .. file
+    return "/usr/bin/env clang-format -i " .. args .. " " .. file
 
   -- Format rust files
   elseif ext == "rs" then
-    return "rustfmt " .. args .. " " .. file
+    return "/usr/bin/env rustfmt " .. args .. " " .. file
 
   -- Format lua files
   elseif ext == "lua" then
-    return "stylua " .. args .. " " .. file
+    return "/usr/bin/env stylua " .. args .. " " .. file
 
   -- Format json files
   elseif ext == "json" then
-    return "jsonrepair "
+    return "/usr/bin/env jsonrepair "
       .. file
       .. " --overwrite "
-      .. "&& jq . "
+      .. "&& /usr/bin/env jq . "
       .. file
       .. " > "
       .. file
@@ -98,11 +98,11 @@ local function get_format_cmd(args)
 
   -- Format toml files
   elseif ext == "toml" then
-    return "taplo fmt " .. args .. " " .. file
+    return "/usr/bin/env taplo fmt " .. args .. " " .. file
 
   -- Format yaml files
   elseif ext == "yaml" or ext == "yml" then
-    return "prettier --write " .. args .. " " .. file
+    return "/usr/bin/env prettier --write " .. args .. " " .. file
   else
     return nil
   end

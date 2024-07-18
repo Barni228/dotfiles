@@ -1,0 +1,11 @@
+neovim-bin = "/opt/homebrew/bin/nvim"
+maximized = true
+frame = "buttonless"
+title-hidden = true
+
+[font]
+normal = ["FiraCode Nerd Font"]
+size = 19
+
+[font.features]
+"FiraCode Nerd Font" = [ "+ss05", "+ss03", "+cv30", "+ss02", "+ss08" ]
