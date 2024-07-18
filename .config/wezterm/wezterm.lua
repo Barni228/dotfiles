@@ -58,7 +58,10 @@ config.window_background_gradient = {
 }
 
 config.colors = {
-	background = "#1c1d27",
+	cursor_bg = "#9a9faa",
+	cursor_border = "#9a9faa",
+	cursor_fg = "#1d222b", -- Optional: Set the cursor text color
+	background = "#1d222b",
 }
 config.font_size = 19.0
 config.font = wezterm.font(fonts[1][1])
