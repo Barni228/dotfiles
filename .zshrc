@@ -166,9 +166,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 bindkey -v
 export KEYTIMEOUT=1
 
-# tell wezterm to start in fullscreen
-printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
-
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
@@ -216,6 +213,9 @@ alias nvimconf="nvim ~/.config/nvim/"
 alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
+
+# tell wezterm to start in fullscreen
+printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
 
 alias nvim='nvim --listen /tmp/nvim-server.pipe'
 

@@ -103,6 +103,21 @@ vim.keymap.set(
 )
 -- }}}
 
+-- Spell check keymaps {{{
+vim.keymap.set(
+  "i",
+  "<C-m>", -- Ctrl m
+  "<c-g>u<Esc>[s1z=`]a<c-g>u", -- will select first suggestion for previous misspelled word
+  { noremap = true, silent = true, desc = "󰓆 Fix spelling" }
+)
+
+vim.keymap.set(
+  "n",
+  "<C-m>", -- Ctrl m
+  "[s1z=`'", -- will select first suggestion for previous misspelled word
+  { noremap = true, silent = true, desc = "󰓆 Fix spelling" }
+)
+-- }}}
 -- Terminal keymaps {{{
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true, desc = "Escape terminal mode" })
 vim.keymap.set(

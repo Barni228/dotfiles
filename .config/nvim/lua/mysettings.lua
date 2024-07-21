@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- it will not stop everything, only delay function execution, so that gen markdown has time to load
 
 -- Function to get the terminal command based on file extension
+---@type fun(args: string): string?
 local function get_run_cmd(args)
   local file = vim.fn.shellescape(vim.fn.expand "%")
   local ext = vim.fn.expand "%:e"
@@ -57,6 +58,32 @@ local function get_run_cmd(args)
     return nil
   end
 end
+
+---@type fun(name: string, how: string, after?: string, another?: string)
+local function run_cmd(name, how, after, another)
+  after = after or ""
+  another = another or ""
+  vim.api.nvim_create_user_command(name, function(opts)
+    local args = table.concat(opts.fargs, " ")
+    vim.cmd "w"
+    local cmd = get_run_cmd(args)
+    if cmd then
+      vim.cmd(how .. cmd .. after)
+      vim.cmd(another)
+      vim.cmd "setlocal nospell"
+    else
+      print "Unknown file extension"
+    end
+  end, { nargs = "*", complete = "file" })
+end
+
+-- Create the Run commands
+run_cmd("Run", "!")
+run_cmd("Runt", "terminal ", "", "norm i")
+run_cmd("RunTf", 'TermExec cmd="', '"')
+run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
+run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
+
 
 local function get_format_cmd(args)
   local file = vim.fn.expand "%"
@@ -126,29 +153,5 @@ vim.api.nvim_create_user_command("Forms", function()
   local end_pos = vim.fn.getpos "'>"
   vim.lsp.buf.range_formatting({}, { start_pos[2] - 1, start_pos[3] - 1 }, { end_pos[2] - 1, end_pos[3] })
 end, {})
-
----@type fun(name: string, how: string, after?: string, another?: string)
-local function run_cmd(name, how, after, another)
-  after = after or ""
-  another = another or ""
-  vim.api.nvim_create_user_command(name, function(opts)
-    local args = table.concat(opts.fargs, " ")
-    vim.cmd "w"
-    local cmd = get_run_cmd(args)
-    if cmd then
-      vim.cmd(how .. cmd .. after)
-      vim.cmd(another)
-    else
-      print "Unknown file extension"
-    end
-  end, { nargs = "*", complete = "file" })
-end
-
--- Create the Run commands
-run_cmd("Run", "!")
-run_cmd("Runt", "terminal ", "", "norm i")
-run_cmd("RunTf", 'TermExec cmd="', '"')
-run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
-run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
 
 return {}
