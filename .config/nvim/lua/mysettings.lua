@@ -21,38 +21,37 @@ vim.api.nvim_create_autocmd("FileType", {
 ---@type fun(args: string): string?
 local function get_run_cmd(args)
   local file = vim.fn.shellescape(vim.fn.expand "%")
-  local ext = vim.fn.expand "%:e"
   local file_name = vim.fn.shellescape(vim.fn.expand "%:p:r")
 
-  if ext == "zsh" then
+  if vim.bo.ft == "zsh" then
     return "/usr/bin/env zsh " .. file .. " " .. args
 
   -- Compile with optimization level 2 and run c files
-  elseif ext == "c" then
+  elseif vim.bo.ft == "c" then
     return "/usr/bin/env clang -O2 " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args
 
     -- Compile and run rust files
-  elseif ext == "rs" then
+  elseif vim.bo.ft == "rust" then
     -- if cargo is available, use it, else use rustc
     -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
     -- if cargo is available, use it, else use cargo script
     return "/usr/bin/env cargo check && (/usr/bin/env cargo run --" .. args .. ") || (/usr/bin/env cargo script --debug " .. file .. " -- " .. args .. ")"
 
     -- Run python files
-  elseif ext == "py" then
+  elseif vim.bo.ft == "python" then
     return "/usr/bin/env python3 " .. file .. " " .. args
 
   -- Run lua files
-  elseif ext == "lua" then
+  elseif vim.bo.ft == "lua" then
     return "/usr/bin/env luajit " .. file .. " " .. args
 
   -- Run cython files
-  elseif ext == "pyx" then
+  elseif vim.bo.ft == "pyrex" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .
     return "/usr/bin/env python3 -c 'import pyximport; pyximport.install(); import " .. module_name .. "'"
 
   -- Show markdown files
-  elseif ext == "md" then
+  elseif vim.bo.ft == "markdown" then
     return "/usr/bin/env glow " .. file
   else
     return nil
@@ -68,6 +67,7 @@ local function run_cmd(name, how, after, another)
     vim.cmd "w"
     local cmd = get_run_cmd(args)
     if cmd then
+      os.execute [[exec 2> >(while read -r line; do echo -e "\033[38;5;202m$line\033[0m" >&2; done)]]
       vim.cmd(how .. cmd .. after)
       vim.cmd(another)
       vim.cmd "setlocal nospell"
@@ -79,7 +79,7 @@ end
 
 -- Create the Run commands
 run_cmd("Run", "!")
-run_cmd("Runt", "terminal ", "", "norm i")
+run_cmd("Runt", "terminal ", "", "startinsert")
 run_cmd("RunTf", 'TermExec cmd="', '"')
 run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
 run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
@@ -87,30 +87,29 @@ run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
 
 local function get_format_cmd(args)
   local file = vim.fn.expand "%"
-  local ext = vim.fn.expand "%:e"
 
   -- Format python files
-  if ext == "py" then
+  if vim.bo.ft == "python" then
     return "/usr/bin/env ruff format " .. args .. " " .. file
 
   -- Format zsh files
-  elseif ext == "zsh" or ext == "sh" or ext == "bash" or ext == "" or ext == "fish" then
+  elseif vim.bo.ft == "zsh" or vim.bo.ft == "sh" or vim.bo.ft == "bash" or vim.bo.ft == "fish" then
     return "/usr/bin/env shfmt -w -i 4 " .. args .. " " .. file
 
   -- Format c files
-  elseif ext == "c" then
+  elseif vim.bo.ft == "c" then
     return "/usr/bin/env clang-format -i " .. args .. " " .. file
 
   -- Format rust files
-  elseif ext == "rs" then
+  elseif vim.bo.ft == "rust" then
     return "/usr/bin/env rustfmt " .. args .. " " .. file
 
   -- Format lua files
-  elseif ext == "lua" then
+  elseif vim.bo.ft == "lua" then
     return "/usr/bin/env stylua " .. args .. " " .. file
 
   -- Format json files
-  elseif ext == "json" then
+  elseif vim.bo.ft == "json" then
     return "/usr/bin/env jsonrepair "
       .. file
       .. " --overwrite "
@@ -124,11 +123,15 @@ local function get_format_cmd(args)
       .. file
 
   -- Format toml files
-  elseif ext == "toml" then
+  elseif vim.bo.ft == "toml" then
     return "/usr/bin/env taplo fmt " .. args .. " " .. file
 
   -- Format yaml files
-  elseif ext == "yaml" or ext == "yml" then
+  elseif vim.bo.ft == "yaml" then
+    return "/usr/bin/env prettier --write " .. args .. " " .. file
+
+  -- Format markdown files
+  elseif vim.bo.ft == "markdown" then
     return "/usr/bin/env prettier --write " .. args .. " " .. file
   else
     return nil

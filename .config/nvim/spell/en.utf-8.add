@@ -6,7 +6,6 @@ cython
 cmd
 venv
 while
-while
 bruh
 stylua
 Barni
@@ -23,3 +22,6 @@ json
 rustc
 HashMap
 HashSet
+stdout
+stderr
+stdin
