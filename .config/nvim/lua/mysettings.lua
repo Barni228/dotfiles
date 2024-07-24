@@ -67,7 +67,6 @@ local function run_cmd(name, how, after, another)
     vim.cmd "w"
     local cmd = get_run_cmd(args)
     if cmd then
-      os.execute [[exec 2> >(while read -r line; do echo -e "\033[38;5;202m$line\033[0m" >&2; done)]]
       vim.cmd(how .. cmd .. after)
       vim.cmd(another)
       vim.cmd "setlocal nospell"
