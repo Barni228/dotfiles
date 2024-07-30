@@ -132,8 +132,10 @@ vim.keymap.set(
 -- }}}
 
 -- Run keymaps {{{
-vim.keymap.set("n", "<Leader>R", "<cmd>Run<cr>", { noremap = true, silent = true, desc = " Run in terminal" })
+vim.keymap.set("n", "<Leader>R", "<cmd>Runt<cr>", { noremap = true, silent = true, desc = "Run file with !" })
 
+-- <leader>r is in plugins/astrocore.lua
+--[[
 vim.keymap.set(
   "n",
   "<Leader>trf",
@@ -154,4 +156,5 @@ vim.keymap.set(
   "<cmd>RunTv<cr>",
   { noremap = true, silent = true, desc = " ToggleTerm run vertical" }
 )
+]]
 -- }}}

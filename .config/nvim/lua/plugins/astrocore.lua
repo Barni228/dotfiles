@@ -60,7 +60,7 @@ return {
           desc = "Pick to close",
         },
         ---------------------------------------------------s
-        ["<Leader>r"] = { ":Runt<cr>", desc = "run file" }, -- I ADDED THIS ##########p
+        ["<Leader>r"] = { ":Run<cr>", desc = " Run in terminal" }, -- I ADDED THIS ##########p
         ---------------------------------------------------e
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

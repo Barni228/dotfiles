@@ -76,18 +76,19 @@ local function get_run_cmd(args)
   end
 end
 
----@type fun(name: string, how: string, after?: string, another?: string)
-local function run_cmd(name, how, after, another)
+---@type fun(name: string, how: string, after?: string, cmds?: string[])
+local function run_cmd(name, how, after, cmds)
   after = after or ""
-  another = another or ""
+  cmds = cmds or {}
   vim.api.nvim_create_user_command(name, function(opts)
     local args = table.concat(opts.fargs, " ")
     vim.cmd "w"
     local cmd = get_run_cmd(args)
     if cmd then
       vim.cmd(how .. cmd .. after)
-      vim.cmd(another)
-      vim.cmd "setlocal nospell"
+      for _, command in ipairs(cmds) do
+        vim.cmd(command)
+      end
     else
       print "Unknown file type"
     end
@@ -95,11 +96,12 @@ local function run_cmd(name, how, after, another)
 end
 
 -- Create the Run commands
-run_cmd("Run", "!")
-run_cmd("Runt", "terminal ", "", "startinsert")
-run_cmd("RunTf", 'TermExec cmd="', '"')
-run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
-run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
+run_cmd("Runt", "!")
+run_cmd("Run", "term ", "", { "startinsert", "setlocal nospell" })
+-- there is bug with TermExec cmd so it doesnt work
+-- run_cmd("RunTf", 'TermExec cmd="', '"')
+-- run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
+-- run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
 
 local function get_format_cmd(args)
   local file = vim.fn.expand "%"
