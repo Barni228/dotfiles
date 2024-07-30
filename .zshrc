@@ -214,9 +214,6 @@ alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 
-# tell wezterm to start in fullscreen
-printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
-
 alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
 nv () {
@@ -299,6 +296,9 @@ source $(brew --prefix)/share/zsh-autopair/autopair.zsh
 eval "$(atuin init zsh --disable-up-arrow)"
 bindkey -M vicmd '/' atuin-up-search-vicmd
 source ~/.atuin/_atuin
+
+# tell wezterm to start in fullscreen
+printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
 
 # Redirect stderr to a function that colorizes it
 # exec 2> >(while read -r line; do echo -e "\033[38;5;202m$line\033[0m" >&2; done)

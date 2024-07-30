@@ -123,7 +123,10 @@ vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true, des
 vim.keymap.set(
   "n",
   "<Leader>tp",
-  "<cmd>TermExec cmd='ipython; exit'<cr>",
+  function()
+    vim.cmd("TermExec cmd='ipython; exit'")
+    vim.cmd("tnoremap <buffer> <esc> <esc>")
+  end,
   { noremap = true, silent = true, desc = " ToggleTerm ipython" }
 )
 -- }}}
