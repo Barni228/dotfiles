@@ -2,6 +2,8 @@
 
 -- Enable spellcheck
 vim.opt.spell = true
+vim.opt.list = true
+vim.opt.listchars = "tab:▸\\ ,trail:·,nbsp:␣"
 
 vim.cmd "set clipboard="
 vim.cmd ":tnoremap <Esc> <C-\\><C-N>"
@@ -15,9 +17,19 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (400 = 0.4 second)
   end,
 })
+
+local lschars = false
+vim.api.nvim_create_user_command("LsChars", function()
+  lschars = not lschars
+  if lschars then
+    vim.opt.listchars = "tab:  ,trail:·,extends:>,precedes:<,nbsp:␣,eol:↴,space:·"
+  else
+    vim.opt.listchars = "tab:▸\\ ,trail:·,nbsp:␣"
+  end
+end, {})
 -- it will not stop everything, only delay function execution, so that gen markdown has time to load
 
--- Function to get the terminal command based on file extension
+-- Function to get the terminal command based on file type
 ---@type fun(args: string): string?
 local function get_run_cmd(args)
   local file = vim.fn.shellescape(vim.fn.expand "%")
@@ -30,14 +42,20 @@ local function get_run_cmd(args)
   elseif vim.bo.ft == "c" then
     return "/usr/bin/env clang -O2 " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args
 
-    -- Compile and run rust files
+  -- Compile and run rust files
   elseif vim.bo.ft == "rust" then
     -- if cargo is available, use it, else use rustc
     -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
     -- if cargo is available, use it, else use cargo script
-    return "/usr/bin/env cargo check && (/usr/bin/env cargo run --" .. args .. ") || (/usr/bin/env cargo script --debug " .. file .. " -- " .. args .. ")"
+    return "/usr/bin/env cargo check && (/usr/bin/env cargo run --"
+      .. args
+      .. ") || (/usr/bin/env cargo script --debug -- "
+      .. file
+      .. " "
+      .. args
+      .. ")"
 
-    -- Run python files
+  -- Run python files
   elseif vim.bo.ft == "python" then
     return "/usr/bin/env python3 " .. file .. " " .. args
 
@@ -71,7 +89,7 @@ local function run_cmd(name, how, after, another)
       vim.cmd(another)
       vim.cmd "setlocal nospell"
     else
-      print "Unknown file extension"
+      print "Unknown file type"
     end
   end, { nargs = "*", complete = "file" })
 end
@@ -82,7 +100,6 @@ run_cmd("Runt", "terminal ", "", "startinsert")
 run_cmd("RunTf", 'TermExec cmd="', '"')
 run_cmd("RunTh", 'TermExec direction=horizontal go_back=0 cmd="', '"')
 run_cmd("RunTv", 'TermExec direction=vertical go_back=0 size=50 cmd="', '"')
-
 
 local function get_format_cmd(args)
   local file = vim.fn.expand "%"
@@ -145,7 +162,7 @@ vim.api.nvim_create_user_command("Form", function(opts)
   if cmd then
     vim.cmd("!" .. cmd)
   else
-    print "Unknown file extension"
+    print "Unknown file type"
   end
 end, {})
 
