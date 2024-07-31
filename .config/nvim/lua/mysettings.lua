@@ -47,7 +47,7 @@ local function get_run_cmd(args)
     -- if cargo is available, use it, else use rustc
     -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
     -- if cargo is available, use it, else use cargo script
-    return "/usr/bin/env cargo check && (/usr/bin/env cargo run --"
+    return "(/usr/bin/env cargo check 2> /dev/null) && (/usr/bin/env cargo run --"
       .. args
       .. ") || (/usr/bin/env cargo script --debug -- "
       .. file
