@@ -15,10 +15,28 @@
 
 # Ignore whatever this is
 .config/.energizelab.config
+
+# Ignore IPython unneeded files
 .ipython/profile_default/startup/
 .ipython/profile_default/history.sqlite
 .ipython/profile_default/log/
 .ipython/profile_default/pid/
 .ipython/profile_default/security/
+
+# Ignore Karabiner backups
 .config/karabiner/automatic_backups
+
+# Ignore my second nvim config for now
 .config/nvim2
+
+# Ignore cargo stuff
+.cargo/.crates.toml
+.cargo/.crates2.json
+.cargo/.global-cache
+.cargo/.package-cache
+.cargo/.package-cache-mutate
+.cargo/env
+.cargo/script-cache
+.cargo/registry
+.cargo/binary-cache
+.cargo/bin
