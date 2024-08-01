@@ -46,8 +46,8 @@ local function get_run_cmd(args)
   elseif vim.bo.ft == "rust" then
     -- if cargo is available, use it, else use rustc
     -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
-    -- if cargo is available, use it, else use cargo script
-    return "(/usr/bin/env cargo check 2> /dev/null) && (/usr/bin/env cargo run --"
+    -- if cargo is available, use it, else use cargo script (use cargo build instead of cargo check)
+    return "(/usr/bin/env cargo build 2> /dev/null) && (/usr/bin/env cargo run --"
       .. args
       .. ") || (/usr/bin/env cargo script --debug -- "
       .. file
@@ -151,6 +151,12 @@ local function get_format_cmd(args)
   -- Format markdown files
   elseif vim.bo.ft == "markdown" then
     return "/usr/bin/env prettier --write " .. args .. " " .. file
+
+  -- Just save oil.nvim buffer
+  elseif vim.bo.ft == "oil" then
+    return false
+
+  -- If file type is not yet supported, return nil
   else
     return nil
   end
@@ -163,6 +169,9 @@ vim.api.nvim_create_user_command("Form", function(opts)
   local cmd = get_format_cmd(args)
   if cmd then
     vim.cmd("!" .. cmd)
+
+  elseif cmd == false then
+    return
   else
     print "Unknown file type"
   end
