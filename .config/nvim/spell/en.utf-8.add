@@ -26,3 +26,4 @@ stdout
 stderr
 stdin
 wezterm
+struct
