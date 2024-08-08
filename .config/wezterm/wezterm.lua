@@ -4,15 +4,8 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+-- use ctrl option f to toggle ligatures
 local fonts = {
-	-- {
-	-- 	family = "OpenDyslexicM Nerd Font Mono",
-	-- 	weight = "Medium",
-	-- 	stretch = "SemiExpanded",
-	-- 	style = "Italic",
-	-- },
-	-- { "Symbol", 17 },
-	-- { "FiraCode Nerd Font", 19 },
 	{
 		{
 			family = "FiraCode Nerd Font",
@@ -21,21 +14,16 @@ local fonts = {
 		},
 		19,
 	},
-	{ "ComicShannsMono Nerd Font", 20 },
-	{ "JetBrainsMono Nerd Font", 19 },
-	{ "CaskaydiaCove Nerd Font", 19 },
-	{ "Hack Nerd Font", 19 },
+	{
+		{
+			family = "FiraCode Nerd Font",
+			harfbuzz_features = { "calt=0", "ss05", "ss03", "cv30" }, -- disable ligatures
+		},
+		19,
+	},
+	-- { "ComicShannsMono Nerd Font", 20 },
 }
-local font_i = 0
--- This is where you actually apply your config choices -> @ &
-
--- For example, changing the color scheme:
--- config.cursor_blink_ease_in = "Constant" |--| ---------> === =========> =>   => <= >= <>
--- config.cursor_blink_ease_out = "Constant" -> |--| === => ==> != == <= >=
-
--- Key bindings to adjust font size without affecting the window size
--- config.keys = {
--- 	keys = {
+local font_i = 1
 -- config.color_scheme = "TwoDark++"
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
@@ -107,30 +95,4 @@ config.keys = {
 		end),
 	},
 }
-
--- 		{
--- 			mods = "CTRL|SHIFT",
--- 			key = "i",
--- 			action = wezterm.action_callback(function(win, pane)
--- 				wezterm.log_info("Hello from callback!")
--- 				wezterm.log_info("WindowID:", win:window_id(), "PaneID:", pane:pane_id())
--- 			end),
--- 		},
--- 	},
--- }
-
--- and finally, return the configuration to wezterm
-
--- return {
---
--- 	keys = {
--- 		{
--- 			key = "Delete",
--- 			action = wezterm.action_callback(function()
--- 				-- wezterm.write("\027[3;5~") -- Send the forward delete escape sequence
--- 				wezterm.write("hi")
--- 			end),
--- 		},
--- 	},
--- }
 return config
