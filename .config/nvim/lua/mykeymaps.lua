@@ -47,8 +47,8 @@ end, { noremap = true, silent = true, desc = "Open file in QuickLook" })
 -- vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { noremap = true, silent = true, desc = "󰊢 Neogit" })
 vim.keymap.set("n", "<leader>gg", function()
   -- vim.cmd("LazyGit")
-  vim.cmd("LazyGitCurrentFile")
-  vim.cmd("tnoremap <buffer> <esc> <esc>") -- disable escape key
+  vim.cmd "LazyGitCurrentFile"
+  vim.cmd "tnoremap <buffer> <esc> <esc>" -- disable escape key
 end, { noremap = true, silent = true, desc = "󰊢 LazyGit" })
 -- }}}
 
@@ -103,6 +103,11 @@ vim.keymap.set(
 )
 -- }}}
 
+-- Motion keymaps {{{
+vim.keymap.set({ "n", "v" }, "<S-left>", "H", { noremap = true, silent = true, desc = "Move down" })
+vim.keymap.set({ "n", "v" }, "<S-right>", "L", { noremap = true, silent = true, desc = "Move up" })
+-- }}}
+
 -- Spell check keymaps {{{
 vim.keymap.set(
   "i",
@@ -120,15 +125,10 @@ vim.keymap.set(
 -- }}}
 -- Terminal keymaps {{{
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true, desc = "Escape terminal mode" })
-vim.keymap.set(
-  "n",
-  "<Leader>tp",
-  function()
-    vim.cmd("TermExec cmd='ipython; exit'")
-    vim.cmd("tnoremap <buffer> <esc> <esc>")
-  end,
-  { noremap = true, silent = true, desc = " ToggleTerm ipython" }
-)
+vim.keymap.set("n", "<Leader>tp", function()
+  vim.cmd "TermExec cmd='ipython; exit'"
+  vim.cmd "tnoremap <buffer> <esc> <esc>"
+end, { noremap = true, silent = true, desc = " ToggleTerm ipython" })
 -- }}}
 
 -- Run keymaps {{{
