@@ -32,6 +32,9 @@ end, {})
 -- Function to get the terminal command based on file type
 ---@type fun(args: string): string?
 local function get_run_cmd(args)
+  ---@diagnostic disable-next-line: undefined-global
+  if type(RUN_CMD) == "string" then return RUN_CMD end
+
   local file = vim.fn.shellescape(vim.fn.expand "%")
   local file_name = vim.fn.shellescape(vim.fn.expand "%:p:r")
 
@@ -82,7 +85,7 @@ local function run_cmd(name, how, after, cmds)
   cmds = cmds or {}
   vim.api.nvim_create_user_command(name, function(opts)
     local args = table.concat(opts.fargs, " ")
-    vim.cmd "w"
+    vim.cmd "wa"
     local cmd = get_run_cmd(args)
     if cmd then
       vim.cmd(how .. cmd .. after)
@@ -169,7 +172,6 @@ vim.api.nvim_create_user_command("Form", function(opts)
   local cmd = get_format_cmd(args)
   if cmd then
     vim.cmd("!" .. cmd)
-
   elseif cmd == false then
     return
   else
