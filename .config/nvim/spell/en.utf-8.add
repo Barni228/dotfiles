@@ -29,3 +29,5 @@ wezterm
 struct
 FiraCode
 ctrl
+cloneable
+ident
