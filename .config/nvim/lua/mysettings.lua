@@ -17,6 +17,33 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (400 = 0.4 second)
   end,
 })
+-- it will not stop everything, only delay function execution, so that gen markdown has time to load
+
+local function file_exists(file_name)
+  local function exists(path)
+    local f = io.open(path, "r")
+    if f then
+      f:close()
+      return true
+    else
+      return false
+    end
+  end
+
+  local current_dir = io.popen("pwd"):read()
+
+  while current_dir ~= nil do
+    local file_path = current_dir .. "/" .. file_name
+    if exists(file_path) then return file_path end
+    -- Move to the parent directory
+    current_dir = current_dir:match "^(.*)/[^/]*$"
+  end
+
+  -- Check in root directory
+  if exists("/" .. file_name) then return "/" .. file_name end
+
+  return nil -- File not found
+end
 
 local lschars = false
 vim.api.nvim_create_user_command("LsChars", function()
@@ -27,7 +54,6 @@ vim.api.nvim_create_user_command("LsChars", function()
     vim.opt.listchars = "tab:▸\\ ,trail:·,nbsp:␣"
   end
 end, {})
--- it will not stop everything, only delay function execution, so that gen markdown has time to load
 
 -- Function to get the terminal command based on file type
 ---@type fun(args: string): string?
@@ -47,16 +73,11 @@ local function get_run_cmd(args)
 
   -- Compile and run rust files
   elseif vim.bo.ft == "rust" then
-    -- if cargo is available, use it, else use rustc
-    -- return "cargo check && (cargo run -- " .. args .. ") || (rustc " .. file .. " -o " .. file_name .. " && " .. file_name .. " " .. args .. ")"
-    -- if cargo is available, use it, else use cargo script (use cargo build instead of cargo check)
-    return "(/usr/bin/env cargo build 2> /dev/null) && (/usr/bin/env cargo run --"
-      .. args
-      .. ") || (/usr/bin/env cargo script --debug -- "
-      .. file
-      .. " "
-      .. args
-      .. ")"
+    if file_exists "Cargo.toml" then
+      return "/usr/bin/env cargo run -- " .. args
+    else
+      return "/usr/bin/env cargo script --debug -- " .. file .. " " .. args
+    end
 
   -- Run python files
   elseif vim.bo.ft == "python" then
