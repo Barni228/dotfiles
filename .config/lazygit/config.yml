@@ -1,11 +1,14 @@
+disableStartupPopups: true
+notARepository: prompt
+
 gui:
   nerdFontsVersion: "3"
   showFileTree: false
+  skipRewordInEditorWarning: true
 
   theme:
     selectedLineBgColor:
       - "#26464a"
-disableStartupPopups: true
 
 os:
   edit: 'nvim --server /tmp/nvim-server.pipe --remote-tab "{{filename}}"'
