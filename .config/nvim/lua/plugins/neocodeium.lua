@@ -12,18 +12,19 @@ return {
       neocodeium.setup {
         show_label = false,
         silent = true,
+        filetypes = {
+          help = false,
+          gitcommit = true,
+          gitrebase = true,
+          ["."] = false,
+        },
         -- max_lines = -1,
       }
 
       ---@type fun(mode: string|string[], keys: string[], func: string|function, desc: string)
       local function map(mode, keys, func, desc)
         for _, key in ipairs(keys) do
-          vim.keymap.set(
-            mode,
-            key,
-            func,
-            { desc = desc, noremap = true, silent = true }
-          )
+          vim.keymap.set(mode, key, func, { desc = desc, noremap = true, silent = true })
         end
       end
 
@@ -32,9 +33,24 @@ return {
       map("i", { "<M-s>", "<M-c>s", "çs", "ß" }, neocodeium.accept_line, "󰦩 accept line")
       map("i", { "<M-q>", "<M-c>q", "çq", "œ" }, neocodeium.clear, " clear suggestions")
       map("i", { "<M-c>n", "çn" }, neocodeium.cycle_or_complete, "󰒭 next suggestion")
-      map("i", { "<M-c>r", "çr" }, function() neocodeium.cycle_or_complete(-1) end, "󰒮 previous suggestion")
-      map({ "i", "n" }, { "<M-c>cbe", "çcbe" }, "<cmd>NeoCodeium enable_buffer<cr>", "󰚩 Enable Codeium in buffer")
-      map({ "i", "n" }, { "<M-c>cbd", "çcbd" }, "<cmd>NeoCodeium disable_buffer<cr>", "󱚧 Disable Codeium in buffer")
+      map(
+        "i",
+        { "<M-c>r", "çr" },
+        function() neocodeium.cycle_or_complete(-1) end,
+        "󰒮 previous suggestion"
+      )
+      map(
+        { "i", "n" },
+        { "<M-c>cbe", "çcbe" },
+        "<cmd>NeoCodeium enable_buffer<cr>",
+        "󰚩 Enable Codeium in buffer"
+      )
+      map(
+        { "i", "n" },
+        { "<M-c>cbd", "çcbd" },
+        "<cmd>NeoCodeium disable_buffer<cr>",
+        "󱚧 Disable Codeium in buffer"
+      )
       map({ "i", "n" }, { "<M-c>ce", "çce" }, "<cmd>NeoCodeium enable<cr>", "󰚩  Enable Codeium")
       map({ "i", "n" }, { "<M-c>cd", "çcd" }, "<cmd>NeoCodeium disable<cr>", "󱚧  Disable Codeium")
       map({ "i", "n" }, { "<M-c>ct", "çct" }, "<cmd>NeoCodeium toggle<cr>", "  Toggle Codeium")
