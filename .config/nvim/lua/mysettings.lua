@@ -9,6 +9,7 @@ vim.cmd "set clipboard="
 vim.cmd ":tnoremap <Esc> <C-\\><C-N>"
 
 vim.cmd "cnoreabbrev Cody NeoCodeium"
+vim.cmd "highlight @string.escape guifg=#a0e16f"
 
 -- Enable wrap for markdown files (and gen nvim)
 vim.api.nvim_create_autocmd("FileType", {
