@@ -31,3 +31,6 @@ FiraCode
 ctrl
 cloneable
 ident
+async
+i32
+impl
