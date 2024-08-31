@@ -6,11 +6,6 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    -- config = function()
-    --   require("rustacean").setup {
-    --     -- config
-    --   }
-    -- end,
-    lazy = false,
+    ft = "rust",
   },
 }
