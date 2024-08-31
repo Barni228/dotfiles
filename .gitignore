@@ -7,9 +7,6 @@
 # Ignore the raycast directory inside .config
 .config/raycast/
 
-# Ignore the htop directory inside .config
-.config/htop/
-
 # Ignore zsh completion dump file
 .config/.zcompdump
 
