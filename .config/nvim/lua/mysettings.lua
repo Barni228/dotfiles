@@ -188,7 +188,7 @@ local function get_format_cmd(args)
 end
 
 -- Create the Format command
-vim.api.nvim_create_user_command("Form", function(opts)
+vim.api.nvim_create_user_command("Fmt", function(opts)
   local args = table.concat(opts.fargs, " ")
   vim.cmd "w"
   local cmd = get_format_cmd(args)
@@ -202,7 +202,7 @@ vim.api.nvim_create_user_command("Form", function(opts)
 end, {})
 
 -- Create the Format Selection command
-vim.api.nvim_create_user_command("Forms", function()
+vim.api.nvim_create_user_command("Fmts", function()
   local start_pos = vim.fn.getpos "'<"
   local end_pos = vim.fn.getpos "'>"
   vim.lsp.buf.range_formatting({}, { start_pos[2] - 1, start_pos[3] - 1 }, { end_pos[2] - 1, end_pos[3] })

@@ -56,14 +56,14 @@ end, { noremap = true, silent = true, desc = "󰊢 LazyGit" })
 vim.keymap.set(
   "n",
   "<leader><leader>",
-  "<cmd>Form<cr>",
+  "<cmd>Fmt<cr>",
   { noremap = true, silent = true, desc = "Format current buffer" }
 )
 
 vim.keymap.set(
   "v",
   "<leader><leader>",
-  "<cmd>Forms<cr>",
+  "<cmd>Fmts<cr>",
   { noremap = true, silent = true, desc = "Format current selection" }
 )
 -- }}}
