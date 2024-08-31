@@ -6,7 +6,7 @@ vim.opt.list = true
 vim.opt.listchars = "tab:▸\\ ,trail:·,nbsp:␣"
 
 vim.cmd "set clipboard="
-vim.cmd ":tnoremap <Esc> <C-\\><C-N>"
+vim.cmd "tnoremap <Esc> <C-\\><C-N>"
 
 vim.cmd "cnoreabbrev Cody NeoCodeium"
 vim.cmd "highlight @string.escape guifg=#a0e16f"
@@ -145,7 +145,7 @@ local function get_format_cmd(args)
 
   -- Format rust files
   elseif vim.bo.ft == "rust" then
-    return "/usr/bin/env rustfmt " .. args .. " " .. file
+    return "/usr/bin/env rustfmt --edition 2021 " .. args .. " " .. file
 
   -- Format lua files
   elseif vim.bo.ft == "lua" then
