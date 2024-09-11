@@ -111,14 +111,14 @@ vim.keymap.set({ "n", "v" }, "<S-right>", "L", { noremap = true, silent = true, 
 -- Spell check keymaps {{{
 vim.keymap.set(
   "i",
-  "<C-m>", -- Ctrl m
+  "<C-q>", -- Ctrl q
   "<c-g>u<Esc>[s1z=`]a<c-g>u", -- will select first suggestion for previous misspelled word
   { noremap = true, silent = true, desc = "󰓆 Fix spelling" }
 )
 
 vim.keymap.set(
   "n",
-  "<C-m>", -- Ctrl m
+  "<C-q>", -- Ctrl q
   "[s1z=`'", -- will select first suggestion for previous misspelled word
   { noremap = true, silent = true, desc = "󰓆 Fix spelling" }
 )
