@@ -15,3 +15,57 @@ os:
 
 git:
   parseEmoji: true
+
+customCommands:
+  - key: "<c-g>"
+    command: |
+      if [[ -n $TMUX ]]; then
+        tmux display-popup -E -w 95% -h 95% -y 40 "czg"
+      else
+        echo "Not in tmux session"
+        read
+      fi
+
+    description: "Open czg in tmux popup"
+    context: "global"
+
+    # TODO: do something with this, remove or make it work
+    # prompts:
+    #   - type: "menu"
+    #     title: "What type of commit is this?"
+    #     key: "commitType"
+    #     options:
+    #       - name: "feat"
+    #         description: "A new feature"
+    #         value: "feat"
+    #
+    #       - name: "fix"
+    #         description: "A bug fix"
+    #         value: "fix"
+    #
+    #       - name: "docs"
+    #         description: "Documentation only changes"
+    #         value: "docs"
+    #
+    #       - name: "style"
+    #         description: "Changes that do not affect the meaning of the code"
+    #         value: "style"
+    #
+    #       - name: "refactor"
+    #         description: "A code change that neither fixes a bug nor adds a feature"
+    #         value: "refactor"
+    #
+    #       - name: "perf"
+    #         description: "A code change that improves performance"
+    #         value: "perf"
+    #
+    #       - name: "test"
+    #         description: "Adding missing tests or correcting existing tests"
+    #         value: "test"
+    #
+    #       - name: "chore"
+    #         description: "Other changes that don't modify src or test files"
+    #
+    #
+    # type: "input"
+    # context: "global"
