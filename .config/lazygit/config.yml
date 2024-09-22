@@ -11,9 +11,7 @@ gui:
       - "#26464a"
 
 os:
-  edit: 'nvim --server /tmp/nvim-server.pipe --remote-tab "{{filename}}"'
-  editAtLine: 'nvim +{{line}} --server /tmp/nvim-server.pipe --remote-tab "{{filename}}"'
-  openDirInEditor: 'nvim --server /tmp/nvim-server.pipe --remote-tab "{{dir}}"'
+  editPreset: "nvim"
 
 git:
   parseEmoji: true

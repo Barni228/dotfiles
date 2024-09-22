@@ -146,7 +146,6 @@ path+=/opt/homebrew/bin       # it is new way, zsh only
 path+=/opt/X11/bin
 export DISPLAY=:0
 
-
 source ~/venv/bin/activate
 
 # autoload -U compinit
@@ -157,8 +156,8 @@ source ~/venv/bin/activate
 
 
 # set nvim as default editor
-export EDITOR=nv
-export VISUAL=nv
+export EDITOR=nvim
+export VISUAL=nvim
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -207,14 +206,14 @@ alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
 alias morse="python3 -u ~/python/morse.py"
 
-alias quitapps='osascript -e "quit app \"TextEdit\"" -e "quit app \"Preview\"" -e "quit app \"Pages\"" -e "quit app \"Adobe Acrobat Reader\"" -e "quit app \"Terminal\"" -e "quit app \"Activity Monitor\""'
+alias quitapps="~/Desktop/quitapps"
 alias randchar="randchr"
 alias nvimconf="nvim ~/.config/nvim/"
 alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 
-alias nvim='nvim --listen /tmp/nvim-server.pipe'
+# alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
 nv () {
     nvim --listen /tmp/nvim-server.pipe $@
@@ -228,6 +227,8 @@ vrc () {
     $EDITOR __WRITE_.$1 && cat __WRITE_.$1 2> /dev/null | pbcopy; rm -f __WRITE_*
 }
 
+# compile file
+# TODO: make it work with other files but python
 comp () {
     if [[ -f "$1" ]] then
         if [[ "$1" =~ .+\.pyx? ]] then
@@ -262,7 +263,7 @@ nvimswap2 () {
     mv ~/.config/nvim ~/.config/nvim2
 }
 
-# Define the custom completion function
+# Define the custom completion function for comp
 _comp_comp() {
     # Local variables to hold completion state
     local -a files
@@ -344,4 +345,3 @@ printf "\033]1337;SetUserVar=fullscreen=%s\007" $(echo -n bar | base64)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
