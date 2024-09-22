@@ -30,7 +30,7 @@ return {
         },
       }
 
-      require("mini.ai").setup()
+      require("mini.ai").setup { n_lines = 1000000 }
     end,
   },
 }
