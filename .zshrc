@@ -212,17 +212,32 @@ alias nvimconf="nvim ~/.config/nvim/"
 alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
-alias n='{fd -HE .git -t f | fzf --preview "bat -pp --color=always {}" -m} | xargs nvim'
 alias tree="command tre"
 
 # alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
 tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
 
-
-nv () {
-    nvim --listen /tmp/nvim-server.pipe $@
+y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
+
+nv() {
+    if [ "$#" -eq 0 ]; then
+        {fd -HE .git -t f | fzf --preview "bat -pp --color=always {}" -m} | xargs nvim
+    else
+        nvim $@
+    fi
+}
+
+# nv () {
+#     nvim --listen /tmp/nvim-server.pipe $@
+# }
 
 vr () {
     $EDITOR "__WRITE_.$1"; rm -f __WRITE_*
