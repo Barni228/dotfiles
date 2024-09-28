@@ -59,11 +59,11 @@ end, {})
 -- Function to get the terminal command based on file type
 ---@type fun(args: string): string?
 local function get_run_cmd(args)
-  ---@diagnostic disable-next-line: undefined-global
-  if type(RUN_CMD) == "string" then return RUN_CMD end
-
   local file = vim.fn.shellescape(vim.fn.expand "%")
   local file_name = vim.fn.shellescape(vim.fn.expand "%:p:r")
+
+  ---@diagnostic disable-next-line: undefined-global
+  if type(RUN_CMD) == "string" then return RUN_CMD end
 
   if vim.bo.ft == "zsh" then
     return "/usr/bin/env zsh " .. file .. " " .. args
@@ -92,6 +92,10 @@ local function get_run_cmd(args)
   elseif vim.bo.ft == "pyrex" then
     local module_name = file:gsub("%.pyx$", ""):gsub("/", ".") -- Remove the .pyx extension and replace / with .
     return "/usr/bin/env python3 -c 'import pyximport; pyximport.install(); import " .. module_name .. "'"
+
+  -- Show html files
+  elseif vim.bo.ft == "html" then
+    return "open -a 'Google Chrome' " .. file
 
   -- Show markdown files
   elseif vim.bo.ft == "markdown" then
@@ -164,6 +168,11 @@ local function get_format_cmd(args)
       .. file
       .. ".tmp "
       .. file
+
+  -- Format html files
+  -- TODO: maybe use tidy instead of prettier
+  elseif vim.bo.ft == "html" then
+    return "/usr/bin/env prettier --write " .. args .. " " .. file
 
   -- Format toml files
   elseif vim.bo.ft == "toml" then
