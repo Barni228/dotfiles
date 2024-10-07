@@ -170,8 +170,11 @@ local function get_format_cmd(args)
       .. file
 
   -- Format html files
-  -- TODO: maybe use tidy instead of prettier
   elseif vim.bo.ft == "html" then
+    return "/usr/bin/env prettier --write " .. args .. " " .. file
+
+  -- Format css files
+  elseif vim.bo.ft == "css" then
     return "/usr/bin/env prettier --write " .. args .. " " .. file
 
   -- Format toml files
