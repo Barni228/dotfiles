@@ -45,6 +45,7 @@ zmodule prompt-pwd
 
 zmodule romkatv/powerlevel10k --use degit
 
+zmodule jeffreytse/zsh-vi-mode
 # Modules that must be initialized last
 #
 
