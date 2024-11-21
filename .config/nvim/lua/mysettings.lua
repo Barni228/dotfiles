@@ -56,6 +56,11 @@ vim.api.nvim_create_user_command("LsChars", function()
   end
 end, {})
 
+vim.api.nvim_create_user_command("Web", function()
+  require("auto-save").on()
+  vim.cmd "LiveServerStart"
+end, {})
+
 -- Function to get the terminal command based on file type
 ---@type fun(args: string): string?
 local function get_run_cmd(args)
@@ -95,7 +100,7 @@ local function get_run_cmd(args)
 
   -- Show html files
   elseif vim.bo.ft == "html" then
-    return "open -a 'Google Chrome' " .. file
+    return "open " .. file
 
   -- Show markdown files
   elseif vim.bo.ft == "markdown" then
