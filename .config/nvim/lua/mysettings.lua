@@ -1,5 +1,17 @@
 -- if true then return {} end -- WARN: COMMENT THIS LINE TO ACTIVATE THIS FILE
 
+require("mason-lspconfig").setup({
+    ensure_installed = {
+        "cssls",          -- CSS LSP
+        "emmet_ls",       -- Emmet LSP
+        "html",           -- HTML LSP
+        "lua_ls",         -- Lua Language Server
+        "pyright",        -- Python LSP
+        "rust_analyzer",  -- Rust Analyzer
+    },
+    automatic_installation = true, -- Optional: Automatically install specified LSPs
+})
+
 -- Enable spellcheck
 vim.opt.spell = true
 vim.opt.list = true
