@@ -198,7 +198,7 @@ bindkey '^e' edit-command-line
 # autoload -Uz add-zsh-hook
 # add-zsh-hook precmd pin_prompt_to_bottom
 
-# add aliases
+# aliases
 alias run='python3 -u ~/python/python.py 2>&1 | sed "/Secure coding is not enabled for restorable state!/d"'
 alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
@@ -213,6 +213,7 @@ alias nvimplug="nvim ~/.config/nvim/lua/plugins/"
 alias cat="bat -pp"
 alias ls="eza  --icons=always -1"
 alias tree="command tre"
+alias c="clear"
 
 # alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
