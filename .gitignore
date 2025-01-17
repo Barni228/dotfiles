@@ -37,3 +37,6 @@
 .cargo/registry
 .cargo/binary-cache
 .cargo/bin
+
+# Ignore zed stuff
+.config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
