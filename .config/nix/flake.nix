@@ -13,8 +13,24 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ pkgs.vim
+        [
+          pkgs.vim
+          pkgs.tmux
+          pkgs.neovim
+          pkgs.python311Packages.exrex
+          pkgs.yazi
+          pkgs.htop-vim
+          pkgs.eza
+          pkgs.fzf
+          pkgs.ripgrep
+          pkgs.fd
         ];
+
+
+      system.defaults = {
+        dock.autohide = true;
+        NSGlobalDomain.AppleInterfaceStyle = "Dark";
+      };
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
