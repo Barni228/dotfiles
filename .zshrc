@@ -277,13 +277,6 @@ nvimswap () {
     mv ~/.config/nvim.bak ~/.config/nvim2
 }
 
-nvimswap2 () {
-    mv ~/.local/state/nvim ~/.local/state/nvim2
-    mv ~/.local/share/nvim ~/.local/share/nvim2
-    mv ~/.cache/nvim ~/.cache/nvim2
-    mv ~/.config/nvim ~/.config/nvim2
-}
-
 # Define the custom completion function for comp
 _comp_comp() {
     # Local variables to hold completion state
