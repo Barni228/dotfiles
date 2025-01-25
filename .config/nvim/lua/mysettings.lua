@@ -23,13 +23,13 @@ vim.cmd "tnoremap <Esc> <C-\\><C-N>"
 vim.cmd "cnoreabbrev Cody NeoCodeium"
 vim.cmd "highlight @string.escape guifg=#a0e16f"
 
--- Enable wrap for markdown files (and gen nvim)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function()
-    vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (400 = 0.4 second)
-  end,
-})
+-- -- Enable wrap for markdown files (and gen nvim)
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "markdown",
+--   callback = function()
+--     vim.defer_fn(function() vim.opt.wrap = true end, 400) -- Delay in milliseconds (400 = 0.4 second)
+--   end,
+-- })
 -- it will not stop everything, only delay function execution, so that gen markdown has time to load
 
 local function file_exists(file_name)
