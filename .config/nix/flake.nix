@@ -17,13 +17,15 @@
           pkgs.vim
           pkgs.tmux
           pkgs.neovim
-          pkgs.python311Packages.exrex
-          pkgs.yazi
-          pkgs.htop-vim
-          pkgs.eza
-          pkgs.fzf
-          pkgs.ripgrep
-          pkgs.fd
+          pkgs.python311Packages.exrex    # regex operations
+          pkgs.yazi                       # terminal file manager
+          pkgs.htop-vim                   # control running processes
+          pkgs.eza                        # better `ls`
+          pkgs.fzf                        # fuzzy finder
+          pkgs.ripgrep                    # better `grep`
+          pkgs.fd                         # better `find`
+          pkgs.git
+          pkgs.lazygit                    # TUI for git actions
         ];
 
 
