@@ -2,6 +2,13 @@
 
 --- https://github.com/ggandor/leap.nvim
 
+--- you press s (or S to search backward)
+--- you press first character of the search
+--- you press second character of the search, if your cursor is where you wanted it to be, start editing
+--- if it isn't, press the label that marks where you want to be
+--- if the character you is last character on the line, press space 
+--- (e.g. | = cursor, "|  hello, worldo" pressing "so<space>" will "  hello, world|o")
+
 ---@type LazySpec
 return {
   {
