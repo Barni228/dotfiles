@@ -9,7 +9,6 @@ return {
     lazy = false,
     config = function()
       -- mini.animate
-      -- mini.move
 
       -- highlight word under cursor
       require("mini.cursorword").setup()
