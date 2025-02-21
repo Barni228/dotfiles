@@ -1,16 +1,16 @@
 -- if true then return {} end -- WARN: COMMENT THIS LINE TO ACTIVATE THIS FILE
 
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "cssls",          -- CSS LSP
-        "emmet_ls",       -- Emmet LSP
-        "html",           -- HTML LSP
-        "lua_ls",         -- Lua Language Server
-        "pyright",        -- Python LSP
-        "rust_analyzer",  -- Rust Analyzer
-    },
-    automatic_installation = true, -- Optional: Automatically install specified LSPs
-})
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "cssls", -- CSS LSP
+    "emmet_ls", -- Emmet LSP
+    "html", -- HTML LSP
+    "lua_ls", -- Lua Language Server
+    "pyright", -- Python LSP
+    "rust_analyzer", -- Rust Analyzer
+  },
+  automatic_installation = true, -- Optional: Automatically install specified LSPs
+}
 
 -- Enable spellcheck
 vim.opt.spell = true
@@ -117,6 +117,7 @@ local function get_run_cmd(args)
   -- Show markdown files
   elseif vim.bo.ft == "markdown" then
     return "/usr/bin/env glow " .. file
+
   else
     return nil
   end
@@ -170,7 +171,7 @@ local function get_format_cmd(args)
 
   -- Format lua files
   elseif vim.bo.ft == "lua" then
-    return "/usr/bin/env stylua " .. args .. " " .. file
+    return "/usr/bin/env stylua --indent-type Spaces --indent-width 2 " .. args .. " " .. file
 
   -- Format json files
   elseif vim.bo.ft == "json" then
