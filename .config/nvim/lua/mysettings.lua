@@ -211,6 +211,9 @@ local function get_format_cmd(args)
   elseif vim.bo.ft == "oil" then
     return false
 
+  elseif vim.bo.ft == "gdscript" then
+    return "~/venv/bin/gdformat " .. file
+
   -- If file type is not yet supported, return nil
   else
     return nil
