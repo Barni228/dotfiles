@@ -14,8 +14,8 @@ if vim.g.neovide then
     set guicursor=n-v-c:block-Cursor
     set guicursor+=i:ver25-iCursor
 ]]
-  bg = "#1f2029"
-
+  -- bg = "#1f2029"
+  bg = "#1d1e22"
 else
   bg = "none"
 end

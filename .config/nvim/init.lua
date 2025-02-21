@@ -20,3 +20,4 @@ require "polish"
 require "mysettings" -- execute my settings
 require "mykeymaps"
 require "myplugins-config"
+if vim.g.neovide then require "neovide-config" end
