@@ -1,0 +1,175 @@
+{
+  //#region font settings {{{
+  // there is also zoom setting that zooms in everything
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+  "editor.fontFamily": "FiraCode Nerd Font",
+  // "|", ("<=" ">="), "&", "@", ("==" "!=" "===" "!=="),
+  // "editor.fontLigatures": "'cv30', 'ss02', 'ss03', 'ss05', 'ss08'",
+  "editor.fontLigatures": "'cv30', 'ss02', 'ss03', 'ss05', 'ss08'",
+  // }}} #endregion
+  //#region vim {{{
+  "vim.foldfix": true, // dont open folds when moving, or use gj and gk
+  "vim.normalModeKeyBindings": [
+    // format and save
+    {
+      "before": ["leader", "leader"],
+      "commands": [
+        "editor.action.formatDocument",
+        "workbench.action.files.save"
+      ]
+    },
+    // replace all occurences of the selected thing
+    {
+      "before": ["leader", "s"],
+      "commands": [
+        "editor.action.addSelectionToNextFindMatch",
+        "editor.action.startFindReplaceAction"
+      ]
+    },
+    {
+      "before": ["leader", "y"],
+      "after": ["m", "z", "g", "g", "V", "G", "\"", "+", "y", "`", "z"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["leader", "s"],
+      "commands": [
+        "editor.action.addSelectionToNextFindMatch",
+        "editor.action.startFindReplaceAction"
+      ]
+    }
+  ],
+  "vim.leader": " ",
+  "vim.sneak": true,
+  "vim.camelCaseMotion.enable": true,
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1,
+    "asvetliakov.vscode-neovim": 1
+  },
+  "editor.lineNumbers": "relative",
+  "editor.cursorBlinking": "solid",
+  // }}} #endregion
+  //#region lsp {{{
+  "editor.codeLens": false,
+  // godot
+  "godotTools.lsp.serverPort": 6005,
+  "godotTools.editorPath.godot4": "/Applications/Godot.app",
+  // python
+  "python.analysis.typeCheckingMode": "standard",
+  // }}} #endregion
+  //#region custom commands {{{
+  "multiCommand.commands": [
+    {
+      "command": "multiCommand.toggleHints",
+      "label": "toggleHints",
+      "description": "Toggle inline hints",
+      "sequence": [
+        {
+          "command": "toggle",
+          "args": {
+            "id": "my_id_123",
+            "value": [
+              {
+                "editor.inlayHints.enabled": "onUnlessPressed"
+              },
+              {
+                "editor.inlayHints.enabled": "offUnlessPressed"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "command": "multiCommand.toggleLigatures",
+      "label": "Toggle Ligatures",
+      "description": "Toggle font ligatures (<= ≤)",
+      "sequence": [
+        {
+          "command": "toggle",
+          "args": {
+            "id": "ligatures",
+            "value": [
+              {
+                "editor.fontLigatures": "'cv30', 'ss02', 'ss03', 'ss05', 'ss08'"
+              },
+              {
+                "editor.fontLigatures": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "command": "multiCommand.toggleFoldfix",
+      "label": "Toggle Vim Foldfix",
+      "description": "Make j and k not open folds, but breaks relativenumber",
+      "sequence": [
+        {
+          "command": "toggle",
+          "args": {
+            "id": "foldfix",
+            "value": [
+              {
+                "vim.foldfix": true
+              },
+              {
+                "vim.foldfix": false
+              }
+            ]
+          }
+        }
+      ]
+    }
+    // {
+    //     "command": "multiCommand.lazygit",
+    //     "label": "Run Lazygit",
+    //     "description": "Open a new terminal running Lazygit that closes when Lazygit exits",
+    //     "sequence": [
+    //         {
+    //             "command": "workbench.action.terminal.new",
+    //         },
+    //         {
+    //             "command": "workbench.action.terminal.sendSequence",
+    //             "args": {
+    //                 "text": "lazygit\n"
+    //             }
+    //         }
+    //     ]
+    // }
+  ],
+  /// }}} #endregion
+  //#region AI {{{
+  "github.copilot.editor.enableAutoCompletions": false,
+  "codeium.enableCodeLens": false,
+  // }}} #endregion
+  //#region spell checking {{{
+  "cSpell.userWords": ["dont", "elif", "onready", "randf"],
+  // }}} #endregion
+  //#region {{{
+  // "python.defaultInterpreterPath": "/Users/andypukhalyk/venv",
+  // "hediet.vscode-drawio.resizeImages": null,
+  "window.zoomLevel": 0.5,
+  "hediet.vscode-drawio.appearance": "automatic",
+  "editor.inlayHints.enabled": "onUnlessPressed",
+  "codeium.enableConfig": {
+    "*": false
+  },
+  "workbench.editorAssociations": {
+    "*.svg": "hediet.vscode-drawio-text"
+  },
+  "tabnine.experimentalAutoImports": true,
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "editor.minimap.enabled": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+  // }}} #endregion
+}

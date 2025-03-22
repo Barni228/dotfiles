@@ -1,0 +1,26 @@
+// Place your key bindings in this file to override the defaults
+[
+  // accept only one line of suggestion
+  {
+    "key": "shift+tab",
+    "command": "editor.action.inlineSuggest.acceptNextLine",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+  // my custom commands
+  {
+    "key": "ctrl+;",
+    "command": "extension.multiCommand.execute"
+  },
+  //#region delete some markdown shortcuts
+  {
+    "key": "cmd+b",
+    "command": "-markdown.extension.editing.toggleBold",
+    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-markdown.extension.editing.toggleItalic",
+    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  }
+  //#endregion
+]
