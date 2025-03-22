@@ -27,6 +27,7 @@
           pkgs.git
           pkgs.lazygit                    # TUI for git actions
           pkgs.stylua                     # lua formatter
+          pkgs.zk
         ];
 
 

@@ -8,4 +8,4 @@ normal = ["FiraCode Nerd Font"]
 size = 19
 
 [font.features]
-"FiraCode Nerd Font" = [ "+ss05", "+ss03", "+cv30", "+ss02", "+ss08" ]
+"FiraCode Nerd Font" = ["+ss05", "+ss03", "+cv30", "+ss02", "+ss08"]
