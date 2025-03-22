@@ -23,7 +23,7 @@ local fonts = {
 	},
 	-- { "ComicShannsMono Nerd Font", 20 },
 }
-local font_i = 1
+local font_i = 2
 -- config.color_scheme = "TwoDark++"
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
@@ -52,7 +52,7 @@ config.colors = {
 	background = "#1d222b",
 }
 config.font_size = 19.0
-config.font = wezterm.font(fonts[1][1])
+config.font = wezterm.font(fonts[font_i][1])
 config.window_background_opacity = 0.97
 config.integrated_title_button_style = "MacOsNative"
 config.window_decorations = "RESIZE" -- Enables resizing borders
