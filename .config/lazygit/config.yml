@@ -11,7 +11,7 @@ gui:
       - "#26464a"
 
 os:
-  editPreset: "nvim"
+  editPreset: "vscode"
 
 git:
   parseEmoji: true

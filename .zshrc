@@ -244,6 +244,10 @@ vr () {
     $EDITOR "__WRITE_.$1"; rm -f __WRITE_*
 }
 
+cr () {
+    code -w --disable-workspace-trust "__WRITE_.$1"; rm -f __WRITE_*
+}
+
 vrc () {
     $EDITOR __WRITE_.$1 && cat __WRITE_.$1 2> /dev/null | pbcopy; rm -f __WRITE_*
 }
