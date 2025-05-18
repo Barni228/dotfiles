@@ -27,37 +27,105 @@
         "editor.action.startFindReplaceAction"
       ]
     },
+    // run
+    {
+      "before": ["leader", "r"],
+      "commands": ["workbench.action.debug.run"]
+    },
+    // copy entire file
     {
       "before": ["leader", "y"],
       "after": ["m", "z", "g", "g", "V", "G", "\"", "+", "y", "`", "z"]
-    }
-  ],
-  "vim.visualModeKeyBindings": [
+    },
+    //#region move between errors
     {
-      "before": ["leader", "s"],
-      "commands": [
-        "editor.action.addSelectionToNextFindMatch",
-        "editor.action.startFindReplaceAction"
-      ]
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    //#endregion
+    //#region move between breakpoints
+    {
+      "before": ["]", "b"],
+      "commands": ["editor.debug.action.goToNextBreakpoint"]
+    },
+    {
+      "before": ["[", "b"],
+      "commands": ["editor.debug.action.goToPreviousBreakpoint"]
+    },
+    //#endregion
+    // toggle bookmark
+    {
+      "before": ["leader", "m"],
+      "commands": ["bookmarks.toggle"]
+    },
+    //#region move between bookmarks
+    {
+      "before": ["]", "m"],
+      "commands": ["bookmarks.jumpToNext"]
+    },
+    {
+      "before": ["[", "m"],
+      "commands": ["bookmarks.jumpToPrevious"]
+    },
+    //#endregion
+
+    //#region lsp keys
+    // LSP: rename
+    {
+      "before": ["leader", "g", "r"],
+      "commands": ["editor.action.rename"]
+    },
+    // LSP: go to implementation
+    {
+      "before": ["leader", "g", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    // LSP: go to definition
+    {
+      "before": ["leader", "g", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    // LSP: quickfix/code action
+    {
+      "before": ["g", "."],
+      "commands": ["editor.action.quickFix"]
     }
+    //#endregion
   ],
   "vim.leader": " ",
   "vim.sneak": true,
   "vim.camelCaseMotion.enable": true,
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1,
-    "asvetliakov.vscode-neovim": 1
+    "vscodevim.vim": 1
   },
   "editor.lineNumbers": "relative",
   "editor.cursorBlinking": "solid",
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "#0078d4",
+
   // }}} #endregion
   //#region lsp {{{
   "editor.codeLens": false,
   // godot
   "godotTools.lsp.serverPort": 6005,
-  "godotTools.editorPath.godot4": "/Applications/Godot.app",
+  "godotTools.editorPath.godot4": "/Applications/Godot_mono.app/Contents/MacOS/Godot",
   // python
   "python.analysis.typeCheckingMode": "standard",
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[gdscript]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
   // }}} #endregion
   //#region custom commands {{{
   "multiCommand.commands": [
@@ -147,7 +215,26 @@
   "codeium.enableCodeLens": false,
   // }}} #endregion
   //#region spell checking {{{
-  "cSpell.userWords": ["dont", "elif", "onready", "randf"],
+  "cSpell.userWords": [
+    "autofree",
+    "Barni",
+    "dont",
+    "elif",
+    "Lerp",
+    "Mathf",
+    "monkeytype",
+    "onready",
+    "platformer",
+    "pyautogui",
+    "pynput",
+    "randf",
+    "rects",
+    "tscn"
+  ],
+  "cSpell.ignoreRegExpList": [
+    // ignore godot uid paths
+    "uid://[a-z0-9]{12}"
+  ],
   // }}} #endregion
   //#region {{{
   // "python.defaultInterpreterPath": "/Users/andypukhalyk/venv",
@@ -156,20 +243,77 @@
   "hediet.vscode-drawio.appearance": "automatic",
   "editor.inlayHints.enabled": "onUnlessPressed",
   "codeium.enableConfig": {
-    "*": false
+    "*": true
   },
-  "workbench.editorAssociations": {
-    "*.svg": "hediet.vscode-drawio-text"
-  },
+  // "workbench.editorAssociations": {
+  //   "*.svg": "hediet.vscode-drawio-text"
+  // },
   "tabnine.experimentalAutoImports": true,
   "gitlens.plusFeatures.enabled": false,
   "gitlens.currentLine.enabled": false,
   "editor.minimap.enabled": false,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "code-runner.executorMap": {
+    "javascript": "node",
+    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "zig": "zig run",
+    "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "php": "php",
+    "python": "python -u",
+    "perl": "perl",
+    "perl6": "perl6",
+    "ruby": "ruby",
+    "go": "go run",
+    "lua": "lua",
+    "groovy": "groovy",
+    "powershell": "powershell -ExecutionPolicy ByPass -File",
+    "bat": "cmd /c",
+    "shellscript": "bash",
+    "fsharp": "fsi",
+    "csharp": "dotnet script",
+    "vbscript": "cscript //Nologo",
+    "typescript": "ts-node",
+    "coffeescript": "coffee",
+    "scala": "scala",
+    "swift": "swift",
+    "julia": "julia",
+    "crystal": "crystal",
+    "ocaml": "ocaml",
+    "r": "Rscript",
+    "applescript": "osascript",
+    "clojure": "lein exec",
+    "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+    "racket": "racket",
+    "scheme": "csi -script",
+    "ahk": "autohotkey",
+    "autoit": "autoit3",
+    "dart": "dart",
+    "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+    "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+    "haskell": "runghc",
+    "nim": "nim compile --verbosity:0 --hints:off --run",
+    "lisp": "sbcl --script",
+    "kit": "kitc --run",
+    "v": "v run",
+    "sass": "sass --style expanded",
+    "scss": "scss --style expanded",
+    "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+    "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "sml": "cd $dir && sml $fileName",
+    "mojo": "mojo run",
+    "erlang": "escript",
+    "spwn": "spwn build",
+    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+    "gleam": "gleam run -m $fileNameWithoutExt"
   },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
+  "terminal.integrated.suggest.enabled": true,
+  "svg.preview.mode": "svg",
+  "editor.acceptSuggestionOnEnter": "off"
   // }}} #endregion
 }
