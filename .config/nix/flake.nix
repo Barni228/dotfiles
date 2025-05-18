@@ -24,10 +24,12 @@
           pkgs.fzf                        # fuzzy finder
           pkgs.ripgrep                    # better `grep`
           pkgs.fd                         # better `find`
+          pkgs.sd                         # better `sed`
           pkgs.git
           pkgs.lazygit                    # TUI for git actions
           pkgs.stylua                     # lua formatter
           pkgs.zk
+          # pkgs.dotnetCorePackages.sdk_9_0_1xx
         ];
 
 
