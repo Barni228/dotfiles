@@ -142,11 +142,16 @@ unset key
 # --------------------------------------------------------------------
 
 # export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/share/dotnet:$PATH"
 path+=/opt/homebrew/bin       # it is new way, zsh only
 path+=/opt/X11/bin
 export DISPLAY=:0
 
 source ~/venv/bin/activate
+
+export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
+# export GODOT_BIN=$GODOT
+export GODOT_BIN="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 
 # autoload -U compinit
 # zstyle ':completion:*' menu select
@@ -156,8 +161,9 @@ source ~/venv/bin/activate
 
 
 # set nvim as default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=code
+export VISUAL=code
+
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -363,4 +369,3 @@ source ~/.atuin/_atuin
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
