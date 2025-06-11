@@ -141,10 +141,10 @@ unset key
 ####################################################################
 # --------------------------------------------------------------------
 
-# export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/share/dotnet:$PATH"
-path+=/opt/homebrew/bin       # it is new way, zsh only
+# path+=/opt/homebrew/bin       # it is new way, zsh only
 path+=/opt/X11/bin
+export PATH="/opt/homebrew/bin:$PATH"
 export DISPLAY=:0
 
 source ~/venv/bin/activate

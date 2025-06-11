@@ -4,9 +4,6 @@
 # Ignore .mypy_cache directories
 **/.mypy_cache/
 
-# Ignore the raycast directory inside .config
-.config/raycast/
-
 # Ignore zsh completion dump file
 .config/.zcompdump
 
@@ -42,5 +39,6 @@
 # Ignore zed stuff
 .config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
 
+.config/qBittorrent
 
 .config/nvim-bad

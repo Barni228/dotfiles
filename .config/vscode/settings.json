@@ -96,6 +96,12 @@
     }
     //#endregion
   ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["leader", "s"],
+      "commands": ["editor.action.startFindReplaceAction"]
+    }
+  ],
   "vim.leader": " ",
   "vim.sneak": true,
   "vim.camelCaseMotion.enable": true,
@@ -216,6 +222,7 @@
   // }}} #endregion
   //#region spell checking {{{
   "cSpell.userWords": [
+    "andypukhalyk",
     "autofree",
     "Barni",
     "dont",
@@ -313,7 +320,6 @@
   },
   "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
   "terminal.integrated.suggest.enabled": true,
-  "svg.preview.mode": "svg",
-  "editor.acceptSuggestionOnEnter": "off"
+  "svg.preview.mode": "svg"
   // }}} #endregion
 }
