@@ -17,6 +17,28 @@
     "command": "workbench.action.toggleMaximizedPanel",
     "when": "panelFocus"
   },
+  //#region voil shortcuts (oil.nvim)
+  {
+    "key": "-",
+    "command": "voil.openPanelCurrentDir",
+    "when": "!voilDoc && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "-",
+    "command": "voil.gotoParentDir",
+    "when": "voilDoc && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "-",
+    "command": "voil.openPanelCurrentDir",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "-",
+    "command": "voil.openPanel",
+    "when": "inWelcome && !inputFocus"
+  },
+  //#endregion
   //#region delete shortcuts
   //#region delete some markdown shortcuts
   {
@@ -45,6 +67,10 @@
     "key": "alt+cmd+k",
     "command": "-bookmarks.toggle",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+x",
+    "command": "workbench.action.closeEditorsInOtherGroups"
   }
   //#endregion
   //#endregion
