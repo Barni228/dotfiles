@@ -211,6 +211,8 @@ alias stopwatch="python3 -u ~/python/stopwatch.py"
 alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
 alias morse="python3 -u ~/python/morse.py"
+alias months="~/python/months.py"
+alias letters="~/python/letters.py"
 
 alias quitapps="~/Desktop/quitapps"
 alias randchar="randchr"
