@@ -234,6 +234,7 @@
     "Lerp",
     "Mathf",
     "monkeytype",
+    "nvim",
     "onready",
     "platformer",
     "pyautogui",

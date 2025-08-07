@@ -77,20 +77,12 @@ brew "zsh-autopair"
 brew "aiotter/htop-vim/htop-vim", args: ["HEAD"]
 # Tetris in your terminal
 brew "samtay/tui/tetris"
+
+
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
-cask "font-arimo-nerd-font"
-cask "font-caskaydia-cove-nerd-font"
-cask "font-comic-shanns-mono-nerd-font"
-cask "font-fira-code-nerd-font"
-cask "font-hack-nerd-font"
-cask "font-jetbrains-mono-nerd-font"
-cask "font-noto-color-emoji"
-cask "font-open-dyslexic-nerd-font"
-cask "font-recursive-mono-nerd-font"
-cask "font-symbols-only-nerd-font"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # 2D game framework for Lua
@@ -102,6 +94,20 @@ cask "syntax-highlight"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 
+# Fonts
+cask "font-arimo-nerd-font"
+cask "font-caskaydia-cove-nerd-font"
+cask "font-comic-shanns-mono-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-hack-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-noto-color-emoji"
+cask "font-open-dyslexic-nerd-font"
+cask "font-recursive-mono-nerd-font"
+cask "font-symbols-only-nerd-font"
+
+
+# vscode extensions
 vscode "alefragnani.bookmarks"
 vscode "bitwes.gut-extension"
 vscode "chaitanyashahare.lazygit"
