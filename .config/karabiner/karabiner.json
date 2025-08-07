@@ -56,6 +56,35 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_game_pad": true,
+                        "product_id": 24594,
+                        "vendor_id": 11720
+                    },
+                    "ignore": false,
+                    "ignore_vendor_events": true,
+                    "simple_modifications": [
+                        {
+                            "from": { "generic_desktop": "dpad_down" },
+                            "to": [{ "key_code": "down_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_left" },
+                            "to": [{ "key_code": "left_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_right" },
+                            "to": [{ "key_code": "right_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_up" },
+                            "to": [{ "key_code": "up_arrow" }]
+                        }
+                    ]
+                }
+            ],
             "name": "Default profile",
             "selected": true,
             "virtual_hid_keyboard": {
