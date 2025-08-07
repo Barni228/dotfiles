@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Record actions
+# @raycast.title Record actions PyAutoGui
 # @raycast.mode silent
 
 # Optional parameters:
@@ -10,7 +10,7 @@
 # @raycast.needsConfirmation true
 
 # Documentation:
-# @raycast.description Generate code to replicate everything you recorded
+# @raycast.description Generate PyAutoGui code to replicate everything you recorded
 
 # type: ignore
 from pynput import mouse, keyboard
@@ -76,9 +76,9 @@ modifier_keys = {
     keyboard.Key.alt: "alt",
     keyboard.Key.alt_l: "alt",
     keyboard.Key.alt_r: "alt",
-    keyboard.Key.cmd: "cmd",
-    keyboard.Key.cmd_l: "cmd",
-    keyboard.Key.cmd_r: "cmd",
+    keyboard.Key.cmd: "command",
+    keyboard.Key.cmd_l: "command",
+    keyboard.Key.cmd_r: "command",
     keyboard.Key.shift: "shift",
     keyboard.Key.shift_l: "shift",
     keyboard.Key.shift_r: "shift",
@@ -103,14 +103,18 @@ def on_click(x: int, y: int, button: mouse.Button, pressed: bool) -> None:
     else:
         # if we released at different location than where we pressed
         if drag_start is not None and (x, y) != drag_start:
+            add_action(f"pyautogui.moveTo({drag_start[0]}, {drag_start[1]})")
             distance = math.dist(drag_start, (x, y))
             duration = distance / DRAG_SPEED
             add_action(
-                f'a.drag({drag_start[0]}, {drag_start[1]}, {x}, {y}, duration={duration:.2f}, button="{button.name}")'
+                f'pyautogui.dragTo({x}, {y}, duration={duration:.2f}, button="{button.name}")'
             )
         # if this is the same location
         else:
-            add_action(f'pyautogui.click({x:.0f}, {y:.0f}, button="{button.name}")')
+            if button == mouse.Button.left:
+                add_action(f"pyautogui.click({x:.0f}, {y:.0f})")
+            else:
+                add_action(f'pyautogui.click({x:.0f}, {y:.0f}, button="{button.name}")')
         drag_start = None
 
 
@@ -135,19 +139,17 @@ def on_press(key: keyboard.Key) -> None:
 
         # if we pressed shift and we are already holding shift, add wait
         if modifier_keys[key] == "shift" and "shift" in get_held_modifiers():
-            add_action("a.sleep(WAIT_TIME)\n")
+            add_action("pyautogui.sleep(WAIT_TIME)\n")
 
         held_modifiers.add(key)
 
-    # if this is letter key and we hold modifiers other then shift
-    # or this is special key and we are holding any modifiers
-    # make this a hotkey
+    # if we hold modifiers other than shift, make this a hotkey
     elif (len(key_str(key)) == 1 and get_held_modifiers() - {"shift"}) or (
         len(key_str(key)) > 1 and get_held_modifiers()
     ):
-        line = "a.hotkey("
-        # order is which to press modifiers, so there is no `shift cmd` but `cmd shift`
-        order = ["cmd", "ctrl", "alt", "shift"]
+        line = "pyautogui.hotkey("
+        # order is which to press modifiers, so there is no `shift command` but `command shift`
+        order = ["command", "ctrl", "alt", "shift"]
         for mod in order:
             if mod in get_held_modifiers():
                 line += f'"{mod}", '
@@ -156,7 +158,7 @@ def on_press(key: keyboard.Key) -> None:
         add_action(line)
 
     else:
-        add_action(f'a.press("{key_str(key)}")')
+        add_action(f'pyautogui.press("{key_str(key)}")')
 
 
 def on_release(key: keyboard.Key) -> None:
@@ -169,19 +171,16 @@ def stop() -> None:
     keyboard_listener.stop()
 
     output = [
-        "import auto as a\n",
+        "import pyautogui\n",
+        "# EXTREMELY IMPORTANT, ALWAYS ADD THIS",
+        'pyautogui.press("shift")\n',
     ]
 
     if any("WAIT_TIME" in a for a in actions):
         output.append(f"WAIT_TIME = {WAIT_TIME}\n")
 
     output += actions
-    output += [
-        "",
-        "# Confirmation code",
-        'a.hotkey("cmd", "space")',
-        'a.write("Done!")',
-    ]
+
     make_nicer(output)
     final_code = "\n".join(output)
     pyperclip.copy(final_code)
@@ -189,22 +188,15 @@ def stop() -> None:
 
 
 def make_nicer(actions: list[str]) -> None:
-    remove_defaults(actions)
     combine_press_to_write(actions)
-    combine_same(actions, "a.press", ", repeat={}")
-    combine_same(actions, "a.click", ", repeat={}")
-    combine_same(actions, "a.sleep", " * {}")
-
-
-def remove_defaults(actions: list[str]) -> None:
-    for i in range(len(actions)):
-        actions[i] = re.sub(r',? ?button="left"', "", actions[i])
-        actions[i] = re.sub(r",? ?repeat=1", "", actions[i])
+    combine_same(actions, "pyautogui.press", ", interval=0.1, presses={}")
+    combine_same(actions, "pyautogui.click", ", interval=0.1, clicks={}")
+    combine_same(actions, "pyautogui.sleep", " * {}")
 
 
 def combine_press_to_write(actions: list[str]) -> None:
-    PRESS_CHAR_REGEX = r'a\.press\("(.|space)"\)'
-    PRESS_CHAR_REGEX_NO_SPACE = r'a\.press\("(.)"\)'
+    PRESS_CHAR_REGEX = r'pyautogui\.press\("(.|space)"\)'
+    PRESS_CHAR_REGEX_NO_SPACE = r'pyautogui\.press\("(.)"\)'
 
     i = 0
     # I don't wait it to combine press("space") press("space") into write("  ")
@@ -214,7 +206,7 @@ def combine_press_to_write(actions: list[str]) -> None:
             and re.fullmatch(PRESS_CHAR_REGEX_NO_SPACE, actions[i])
             and re.fullmatch(PRESS_CHAR_REGEX, actions[i + 1])
         ):
-            actions[i] = 'a.write("' + re.fullmatch(
+            actions[i] = 'pyautogui.write("' + re.fullmatch(
                 PRESS_CHAR_REGEX_NO_SPACE, actions[i]
             ).group(1)
             while i + 1 < len(actions):
@@ -246,18 +238,18 @@ def combine_same(actions: list[str], common_prefix: str, append: str) -> None:
     i = 0
     while i + 1 < len(actions):
         if actions[i].startswith(common_prefix) and actions[i] == actions[i + 1]:
-            repeat = 2
+            presses = 2
             actions.pop(i + 1)
             while i + 1 < len(actions):
                 if actions[i] == actions[i + 1]:
-                    repeat += 1
+                    presses += 1
                     actions.pop(i + 1)
                 else:
                     break
 
             # we might have a comment or "\n" after ")"
             before, parenthesis, after = actions[i].rpartition(")")
-            actions[i] = before + append.format(repeat) + parenthesis + after
+            actions[i] = before + append.format(presses) + parenthesis + after
 
         i += 1
 

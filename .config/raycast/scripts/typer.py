@@ -1,8 +1,5 @@
 #!/Users/andypukhalyk/.dotfiles/.config/raycast/scripts/venv/bin/python3
 
-# this was supposed to be real shebang
-#!/usr/bin/env python3
-
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title Typer
