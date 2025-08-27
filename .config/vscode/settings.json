@@ -229,6 +229,7 @@
     "autofree",
     "Barni",
     "capslock",
+    "deadzone",
     "dont",
     "elif",
     "Lerp",
@@ -250,10 +251,6 @@
     // ignore voil IDs for files
     "^/[a-zA-Z]{20} [/-] "
   ],
-  // }}} #endregion
-  //#region {{{
-  "python.defaultInterpreterPath": "/Users/andypukhalyk/venv",
-  // "hediet.vscode-drawio.resizeImages": null,
   "window.zoomLevel": 0.5,
   "hediet.vscode-drawio.appearance": "automatic",
   "editor.inlayHints.enabled": "offUnlessPressed",
@@ -325,6 +322,13 @@
     "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
     "gleam": "gleam run -m $fileNameWithoutExt"
   },
-  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"]
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "settingsSync.ignoredSettings": [
+    "godotTools.editorPath.godot4",
+    "godotTools.editorPath.godot3"
+  ],
   // }}} #endregion
 }
