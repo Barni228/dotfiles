@@ -53,6 +53,8 @@ brew "glow"
 brew "libheif"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Interactive computing in Python
 brew "ipython"
 # Lightweight and flexible command-line JSON processor
@@ -75,6 +77,8 @@ brew "ncdu"
 brew "neovim"
 # Platform built on V8 to build network applications
 brew "node"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Search tool like grep and The Silver Searcher
@@ -89,6 +93,8 @@ brew "silicon"
 brew "speedtest-cli"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Opinionated Lua code formatter
+brew "stylua"
 # Version control system designed to be a better CVS
 brew "subversion"
 # Granddaddy of HTML tools, with support for modern standards
@@ -117,6 +123,8 @@ brew "xdotool"
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Auto-close and delete matching delimiters in zsh
@@ -129,6 +137,8 @@ brew "samtay/tui/tetris"
 cask "aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
+# Use your gamepad or joystick like a mouse and keyboard
+cask "enjoyable"
 cask "font-arimo-nerd-font"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-comic-shanns-mono-nerd-font"
@@ -139,21 +149,32 @@ cask "font-noto-color-emoji"
 cask "font-open-dyslexic-nerd-font"
 cask "font-recursive-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
+# Free and open-source media player
+cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Open-source cross-platform alternative to AirDrop
+cask "localsend"
 # 2D game framework for Lua
 cask "love"
 # Full TeX Live distribution without GUI applications
 cask "mactex-no-gui"
+# Utility to extend trackpad functionality
+cask "middleclick"
+# Set of tools to create, alter and inspect Matroska files (MKV)
+cask "mkvtoolnix-app"
 # Tool to create native applications from command-line scripts
 cask "platypus"
 # Quicklook extension for source files
 cask "syntax-highlight"
+# Multimedia player
+cask "vlc"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 # Open-source version of the X.Org X Window System
 cask "xquartz"
 vscode "alefragnani.bookmarks"
+vscode "alimostafavi.voil"
 vscode "bitwes.gut-extension"
 vscode "chaitanyashahare.lazygit"
 vscode "charliermarsh.ruff"

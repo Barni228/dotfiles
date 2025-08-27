@@ -39,6 +39,8 @@ brew "luarocks"
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Search tool like grep and The Silver Searcher, better grep
 brew "ripgrep"
 # Intuitive find & replace CLI, better sed
@@ -87,10 +89,16 @@ cask "alacritty"
 cask "iterm2"
 # 2D game framework for Lua
 cask "love"
+# Utility to extend trackpad functionality
+cask "middleclick"
+# Set of tools to create, alter and inspect Matroska files (MKV)
+cask "mkvtoolnix-app"
 # Tool to create native applications from command-line scripts
 cask "platypus"
 # Quicklook extension for source files
 cask "syntax-highlight"
+# Multimedia player
+cask "vlc"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 
