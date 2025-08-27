@@ -330,5 +330,7 @@
     "godotTools.editorPath.godot4",
     "godotTools.editorPath.godot3"
   ],
+  "debug.openDebug": "neverOpen",
+  "debug.internalConsoleOptions": "neverOpen"
   // }}} #endregion
 }
