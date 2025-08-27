@@ -147,8 +147,6 @@ path+=/opt/X11/bin
 export PATH="/opt/homebrew/bin:$PATH"
 export DISPLAY=:0
 
-source ~/venv/bin/activate
-
 export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 # export GODOT_BIN=$GODOT
 export GODOT_BIN="/Applications/Godot_mono.app/Contents/MacOS/Godot"
