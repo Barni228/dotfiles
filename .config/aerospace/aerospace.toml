@@ -195,3 +195,18 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+# you can get window names with
+# aerospace list-windows
+# or to get app id:
+# aerospace list-apps
+# ignore Godot game debug windows
+[[on-window-detected]]
+if.app-name-regex-substring = 'Godot'
+if.window-title-regex-substring = '.*\(DEBUG\)$'
+run = 'layout floating'
+
+# move vscode to workspace C
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace C'
