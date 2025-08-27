@@ -145,6 +145,7 @@ export PATH="/usr/local/share/dotnet:$PATH"
 # path+=/opt/homebrew/bin       # it is new way, zsh only
 path+=/opt/X11/bin
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/Users/andypukhalyk/my_tools/bin:$PATH"
 export DISPLAY=:0
 
 export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
@@ -208,9 +209,9 @@ alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
 alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
-alias morse="python3 -u ~/python/morse.py"
-alias months="~/python/months.py"
-alias letters="~/python/letters.py"
+# alias morse="python3 -u ~/python/morse.py"
+# alias months="~/python/months.py"
+# alias letters="~/python/letters.py"
 
 alias quitapps="~/Desktop/quitapps"
 alias randchar="randchr"
@@ -221,6 +222,7 @@ alias oil="nvim -u ~/my_tools/oil/init.lua"
 alias ls="eza  --icons=always -1"
 alias tree="command tre"
 alias c="clear"
+alias diff="diff --color=auto"
 
 # alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
