@@ -232,6 +232,7 @@
     "deadzone",
     "dont",
     "elif",
+    "filelist",
     "Lerp",
     "Mathf",
     "monkeytype",
@@ -243,7 +244,8 @@
     "randf",
     "rects",
     "tscn",
-    "uppercased"
+    "uppercased",
+    "walkdir"
   ],
   "cSpell.ignoreRegExpList": [
     // ignore godot uid paths
