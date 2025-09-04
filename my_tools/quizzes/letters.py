@@ -34,7 +34,7 @@ letters = {
     "z": 26,
 }
 
-max_time = len(letters) * 1.3
+max_time = len(letters)
 
 bigger = "bg=+2>."
 smaller = "sl-_1<,"
@@ -72,6 +72,7 @@ def main():
         questions = {str(num): letter for letter, num in questions.items()}
 
     if args.compare:
+        start_args = [quiz.char_input, False]
         max_time *= 2
         arr = [letter for letter in questions.keys()]
         questions = {}

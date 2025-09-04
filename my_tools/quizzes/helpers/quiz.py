@@ -25,11 +25,11 @@ Ignore = (
     | dict[int, Iterable[int]]
 )
 
-SCORE_MESSAGE = """
-Time:     {}s
-Correct:  {}/{}
-Accuracy: {}%
-"""[1:-1]
+SCORE_MESSAGE = """\
+Time:     {}s\n\
+Correct:  {}/{}\n\
+Accuracy: {}%\
+"""
 
 
 def choice_input(prompt: str, values: Iterable[T], input_f: Callable[..., T] = input) -> T:
@@ -162,7 +162,7 @@ class Quiz:
 
 
 def scoreFormat(time_: float, score: int, max_score: int, max_time: float | None = None) -> str:
-    if max_time is not None and time_ > max_time:
+    if max_time is not None and round(time_) > max_time:
         time_color = colored_print.Color.RED
     else:
         time_color = colored_print.Color.BLUE

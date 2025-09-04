@@ -234,6 +234,7 @@
     "elif",
     "filelist",
     "itertools",
+    "keymap",
     "Lerp",
     "Mathf",
     "monkeytype",
