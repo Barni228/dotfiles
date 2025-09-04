@@ -1,0 +1,10 @@
+[[mgr.prepend_keymap]]
+on = ["g", "m"]
+run = "cd ~/my-movies"
+desc = "Go ~/my-movies"
+
+# or
+# [mgr]
+# prepend_keymap = [
+# 	{ on = ["g", "m"], run = "cd ~/my-movies", desc = "Go ~/my-movies" },
+# ]
