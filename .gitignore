@@ -34,17 +34,8 @@
 .config/nvim2
 
 # Ignore cargo stuff
-.cargo/.crates.toml
-.cargo/.crates2.json
-.cargo/.global-cache
-.cargo/.package-cache
-.cargo/.package-cache-mutate
-.cargo/env
-.cargo/script-cache
-.cargo/registry
-.cargo/binary-cache
-.cargo/bin
-.cargo/git
+.cargo/*
+!.cargo/config.toml
 
 # Ignore zed stuff
 .config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
