@@ -152,6 +152,9 @@ export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 # export GODOT_BIN=$GODOT
 export GODOT_BIN="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 
+# change comments color so they are visible with dark theme
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#4f4f4f'
+
 # autoload -U compinit
 # zstyle ':completion:*' menu select
 # zmodload zsh/complist
@@ -169,6 +172,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+
+# carapace
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+source <(carapace _carapace)
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -194,6 +201,9 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# set opt backspace to delete word
+bindkey "^[^?" backward-kill-word
+
 # # pin prompt to the bottom
 # pin_prompt_to_bottom() {
 #     # Move cursor to the bottom of the screen
@@ -209,9 +219,6 @@ alias timer="python3 -u ~/python/timer.py"
 alias stopwatch="python3 -u ~/python/stopwatch.py"
 alias romnum="python3 -u ~/python/rom_num.py"
 alias randchr="python3 ~/python/randchr.py"
-# alias morse="python3 -u ~/python/morse.py"
-# alias months="~/python/months.py"
-# alias letters="~/python/letters.py"
 
 alias quitapps="~/Desktop/quitapps"
 alias randchar="randchr"
@@ -225,6 +232,43 @@ alias c="clear"
 alias diff="diff --color=auto"
 
 # alias nvim='nvim --listen /tmp/nvim-server.pipe'
+
+mp4_srt () {
+    mp4="$1"
+    srt="${2:-${mp4%.*}.srt}"
+    output="${3:-${mp4%.*}_subtitled.mp4}"
+
+    ffmpeg -i "$mp4" -i "$srt" \
+        -c copy -c:s mov_text \
+        -metadata:s:s:0 language=eng \
+        -metadata:s:s:0 title="English" \
+        "$output"
+}
+
+# you can give this any video or audio, and different file types for input and output work
+# e.g. compress hi.mov out.mp4
+compress () {
+    input="$1"
+    output="${2:-${input%.*}_compressed.${input##*.}}"
+
+    # Detect file type (audio/video)
+    has_video=$(ffprobe -v error -select_streams v -show_entries stream=codec_type -of csv=p=0 "$input" 2>/dev/null)
+    has_audio=$(ffprobe -v error -select_streams a -show_entries stream=codec_type -of csv=p=0 "$input" 2>/dev/null)
+
+    if [[ -n "$has_video" ]]; then
+        # 🎥 Video compression
+        # ffmpeg -i "$input" -vcodec libx264 -crf 28 -preset medium -acodec aac -b:a 128k "$output"
+        ffmpeg -i "$input" -c:v libx265 -crf 28 -preset medium -c:a aac -b:a 128k "$output"
+        echo "✅ Wrote to \"$output\""
+    elif [[ -n "$has_audio" ]]; then
+        # 🔊 Audio compression
+        ffmpeg -i "$input" -acodec aac -b:a 128k "$output"
+        echo "✅ Wrote to \"$output\""
+    else
+        echo "❌ Unsupported file type: '$input'"
+        return 1
+    fi
+}
 
 tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
 
@@ -348,6 +392,22 @@ source $(brew --prefix)/share/zsh-autopair/autopair.zsh
 eval "$(atuin init zsh --disable-up-arrow)"
 bindkey -M vicmd '/' atuin-up-search-vicmd
 source ~/.atuin/_atuin
+
+
+# ~/.zshrc
+
+# function show_comment() {
+#   BUFFER="$BUFFER"
+#   zle -M "$(case $BUFFER in
+#     echo*) echo '# this prints text' ;;
+#     ls*) echo '# list files' ;;
+#     pwd) echo '# current directory' ;;
+#     *) echo '' ;;
+#   esac)"
+# }
+# zle -N show_comment
+# bindkey '^I' show_comment  # press Tab to see comment
+
 
 # tell wezterm to start in fullscreen
 # no longer needed because fullscreen doesnt work nicely with aerospace
