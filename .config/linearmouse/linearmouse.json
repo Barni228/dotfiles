@@ -1,7 +1,12 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.1",
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
   "schemes" : [
     {
+      "buttons" : {
+        "mappings" : [
+
+        ]
+      },
       "if" : {
         "device" : {
           "category" : "mouse",
@@ -13,7 +18,20 @@
       },
       "pointer" : {
         "acceleration" : 1.5,
-        "disableAcceleration" : true
+        "disableAcceleration" : false,
+        "speed" : 0.12
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 2
+        },
+        "reverse" : {
+          "vertical" : false
+        },
+        "speed" : {
+          "horizontal" : 10,
+          "vertical" : 6
+        }
       }
     }
   ]
