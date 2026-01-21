@@ -1,0 +1,12 @@
+[package]
+name = "srt"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.99"
+clap = { version = "4.5.47", features = ["cargo"] }
+lazy-regex = "3.4.1"
+
+[dev-dependencies]
+assert_cmd = "2.0.17"
