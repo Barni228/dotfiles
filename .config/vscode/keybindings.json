@@ -71,6 +71,16 @@
   {
     "key": "ctrl+shift+x",
     "command": "workbench.action.closeEditorsInOtherGroups"
+  },
+  {
+    "key": "alt+d",
+    "command": "codeium.diffActionReject",
+    "when": "editorTextFocus && !inlineSuggestionsVisible"
+  },
+  {
+    "key": "alt+r",
+    "command": "-codeium.diffActionReject",
+    "when": "editorTextFocus && !inlineSuggestionsVisible"
   }
   //#endregion
   //#endregion
