@@ -5,7 +5,6 @@
   "terminal.integrated.fontSize": 16,
   "editor.fontFamily": "FiraCode Nerd Font",
   // "|", ("<=" ">="), "&", "@", ("==" "!=" "===" "!=="),
-  // "editor.fontLigatures": "'cv30', 'ss02', 'ss03', 'ss05', 'ss08'",
   "editor.fontLigatures": "'cv30', 'ss02', 'ss03', 'ss05', 'ss08'",
   // }}} #endregion
   //#region vim {{{
@@ -225,36 +224,51 @@
   // }}} #endregion
   //#region spell checking {{{
   "cSpell.userWords": [
+    "agentt",
     "andypukhalyk",
     "autofree",
     "Barni",
     "capslock",
+    "clampf",
+    "crossterm",
     "deadzone",
     "dont",
     "elif",
     "filelist",
+    "hitbox",
     "itertools",
+    "karabiner",
     "keymap",
     "Lerp",
     "Mathf",
     "monkeytype",
     "nvim",
     "onready",
+    "osascript",
     "platformer",
     "powerset",
+    "printerr",
+    "printt",
     "pyautogui",
     "pynput",
     "randf",
     "rects",
+    "respawn",
+    "respawns",
+    "teleporting",
     "tscn",
+    "tweens",
     "uppercased",
-    "walkdir"
+    "walkdir",
+    "WASD"
   ],
   "cSpell.ignoreRegExpList": [
     // ignore godot uid paths
     "uid://[a-z0-9]{12}",
     // ignore voil IDs for files
-    "^/[a-zA-Z]{20} [/-] "
+    "^/[a-zA-Z]{20} [/-] ",
+    // ignore \u{...} unicode characters
+    "\\u\\{[0-9a-fA-F]{1,6}\\}"
   ],
   "window.zoomLevel": 0.5,
   "hediet.vscode-drawio.appearance": "automatic",
@@ -336,6 +350,7 @@
     "godotTools.editorPath.godot3"
   ],
   "debug.openDebug": "neverOpen",
-  "debug.internalConsoleOptions": "neverOpen"
+  "debug.internalConsoleOptions": "neverOpen",
+  "editor.accessibilitySupport": "off"
   // }}} #endregion
 }
