@@ -69,11 +69,14 @@ def main():
         questions = {letter.upper(): num for letter, num in questions.items()}
     # then reverse, so we don't uppercase numbers
     if args.reverse:
+        start_args = [quiz.char_input, False]
         questions = {str(num): letter for letter, num in questions.items()}
 
     if args.compare:
         start_args = [quiz.char_input, False]
-        max_time *= 2
+        # max_time *= 2
+        # max_time = 40
+        max_time = 42
         arr = [letter for letter in questions.keys()]
         questions = {}
         while len(questions) < len(letters):

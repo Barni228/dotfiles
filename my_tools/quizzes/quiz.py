@@ -35,9 +35,9 @@ def get_cmd(q: str) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="run all quizzes")
-    # nargs="?", default="1"
     parser.add_argument("quiz", help="quiz to run", type=str, choices=quiz_indexes, nargs="?")
     parser.add_argument("-k", "--show-key", action="store_true", help="print all quiz commands")
+    parser.add_argument("-p", "--print", action="store_true", help="print the quiz that is running")
 
     args = parser.parse_args()
 
@@ -53,7 +53,8 @@ def main():
         parser.error("the following argument is required: quiz")
 
     cmd = get_cmd(args.quiz)
-    print(cmd)
+    if args.print:
+        print(cmd)
 
     cmd_arr = cmd.split()
 

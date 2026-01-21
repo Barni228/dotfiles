@@ -18,8 +18,8 @@ months = {
     "December": "12",
 }
 
-# 2 seconds per question
-max_time = len(months) * 2
+# 1 seconds per question
+max_time = len(months)
 
 max_len = max(len(k) for k in months)
 months_equal_space = {month.ljust(max_len, " "): num for month, num in months.items()}
