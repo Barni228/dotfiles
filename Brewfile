@@ -7,6 +7,8 @@ tap "samtay/tui"
 
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Multi-shell multi-command argument completer
+brew "carapace"
 # Emacs dependency management
 brew "cask"
 # Modern, maintained replacement for ls
@@ -19,6 +21,8 @@ brew "ffmpeg"
 brew "fzf"
 # GNU compiler collection
 brew "gcc"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Render markdown on the CLI
 brew "glow"
 # Tools and libraries to manipulate images in many formats

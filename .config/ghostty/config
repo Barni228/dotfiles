@@ -1,0 +1,17 @@
+# here is doc: https://ghostty.org/docs/config/reference
+
+# font-family = JetBrains Nerd Font
+font-family = FiraCode Nerd Font Freeze
+font-feature = -calt
+# font-family = Menlo
+font-size = 19
+theme = dracula+
+# background-opacity = 0.98
+# background-blur-radius = 20
+quit-after-last-window-closed = true
+macos-titlebar-style = hidden
+macos-option-as-alt = true
+cursor-style-blink = false
+window-padding-x = 6
+window-padding-y = 6
+cursor-style = bar
