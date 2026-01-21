@@ -115,10 +115,10 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
-# alt-a = 'workspace A' # alt-a is already used to accept Codeium suggestion
+# alt-a = 'workspace A' # disable WASD keys
 alt-b = 'workspace B'
 alt-c = 'workspace C'
-alt-d = 'workspace D'
+# alt-d = 'workspace D' # disable WASD keys
 alt-e = 'workspace E'
 # alt-f = 'workspace F' # alt-f is already used to full screen
 alt-g = 'workspace G'
@@ -129,11 +129,11 @@ alt-o = 'workspace O'
 alt-p = 'workspace P'
 alt-q = 'workspace Q'
 alt-r = 'workspace R'
-# alt-s = 'workspace S' # alt-s is taken to accept one line from Codeium
+# alt-s = 'workspace S' # disable WASD keys
 alt-t = 'workspace T'
 alt-u = 'workspace U'
 alt-v = 'workspace V'
-# alt-w = 'workspace W' # alt-w is already used to close
+# alt-w = 'workspace W' # alt-w is already used to close window, and WASD keys
 alt-x = 'workspace X'
 alt-y = 'workspace Y'
 alt-z = 'workspace Z'
@@ -151,7 +151,7 @@ alt-shift-9 = 'move-node-to-workspace 9'
 # alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
-alt-shift-d = 'move-node-to-workspace D'
+# alt-shift-d = 'move-node-to-workspace D'
 alt-shift-e = 'move-node-to-workspace E'
 # alt-shift-f = 'move-node-to-workspace F'
 alt-shift-g = 'move-node-to-workspace G'
@@ -210,3 +210,14 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace C'
+
+# spell:ignore servez greggman
+# make Servez windows float
+[[on-window-detected]]
+if.app-id = 'com.greggman.servez'
+run = 'layout floating'
+
+# make Godot project manager windows float
+[[on-window-detected]]
+if.window-title-regex-substring = 'Godot Engine - Project Manager'
+run = 'layout floating'
