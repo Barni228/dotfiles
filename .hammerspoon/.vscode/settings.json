@@ -1,0 +1,4 @@
+{
+  "cSpell.allowCompoundWords": true,
+  "Lua.diagnostics.globals": ["hs"]
+}
