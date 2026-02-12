@@ -89,8 +89,16 @@ brew "samtay/tui/tetris"
 cask "aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Desktop automation application
+cask "hammerspoon"
+# Free and open-source media player
+cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Open-source cross-platform alternative to AirDrop
+cask "localsend"
 # 2D game framework for Lua
 cask "love"
 # Utility to extend trackpad functionality
