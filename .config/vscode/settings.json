@@ -117,7 +117,7 @@
   "editor.codeLens": false,
   // godot
   "godotTools.lsp.serverPort": 6005,
-  "godotTools.editorPath.godot4": "/Applications/Godot_mono.app/Contents/MacOS/Godot",
+  "godotTools.editorPath.godot4": "${env:GODOT}",
   // python
   "python.analysis.typeCheckingMode": "standard",
 
@@ -256,11 +256,13 @@
     "respawn",
     "respawns",
     "teleporting",
+    "tilemap",
     "tscn",
     "tweens",
     "uppercased",
     "walkdir",
-    "WASD"
+    "WASD",
+    "ZSTD"
   ],
   "cSpell.ignoreRegExpList": [
     // ignore godot uid paths
@@ -351,6 +353,7 @@
   ],
   "debug.openDebug": "neverOpen",
   "debug.internalConsoleOptions": "neverOpen",
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "godotTools.formatter.spacesBeforeEndOfLineComment": "2"
   // }}} #endregion
 }
