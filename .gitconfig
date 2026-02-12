@@ -1,11 +1,11 @@
 [core]
-editor = nvim
+editor = code
 autocrlf = input
-excludesfile = /Users/andypukhalyk/.gitignore_global
+	excludesfile = /Users/andypukhalyk/.gitignore_global
 
 [user]
-name = Andrii Pukhalyk
-email = pukhalyk1@gmail.com
+	name = Andrii Pukhalyk
+	email = pukhalyk1@gmail.com
 
 [color "status"]
 added = blue
@@ -17,20 +17,33 @@ logl = log --oneline
 conf = config --global
 lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 
-[diff]
-tool = nvimdiff
 
-[difftool "nvimdiff"]
-cmd = nvim -d $LOCAL $REMOTE
+[diff]
+	tool = vscode
+
+
+[difftool "vscode"]
+	cmd = code --wait --diff "$LOCAL" "$REMOTE"
+
 
 [merge]
-tool = diffview
+	tool = vscode
 
 [mergetool]
 prompt = true
 keepBackup = false
 
-[mergetool "diffview"]
-cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+
+[mergetool "vscode"]
+	cmd = code --wait "$MERGED"
+	trustExitCode = true
 [init]
 	defaultBranch = main
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/andypukhalyk/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/andypukhalyk/.stCommitMsg
