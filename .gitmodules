@@ -1,0 +1,3 @@
+[submodule "my_tools/filelist"]
+	path = my_tools/filelist
+	url = https://github.com/Barni228/filelist.git
